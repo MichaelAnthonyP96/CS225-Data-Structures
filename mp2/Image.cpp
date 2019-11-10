@@ -15,14 +15,12 @@ Image::~Image(){//destructor
 
 Image::Image(const Image &other){//copy constructor
     imageData_ = NULL;
-    _copy(other);
+    this->Image::_copy(other);
 }
-/*
 Image const & Image::operator= (Image const & other){
-	if (this != &other) { _copy(other); }
+	if (this != &other) { Image::_copy(other); }
     return *this;
 }
-*/
 
 Image::Image(unsigned int width, unsigned int height) {
     width_ = width;
@@ -50,14 +48,14 @@ This function ensures that the luminance remains in the range [0, 1].
 void Image::lighten(){
 	for (unsigned x = 0; x < this->cs225::PNG::width(); x++) {
     	for (unsigned y = 0; y < this->cs225::PNG::height(); y++) {
-      	cs225::HSLAPixel & pixel = this->cs225::PNG::getPixel(x, y);
+      	    cs225::HSLAPixel & pixel = this->cs225::PNG::getPixel(x, y);
 
-	    pixel.l = pixel.l + 0.1;
-		if(pixel.l > 1.0)
-			pixel.l = 1.0;
-		else if(pixel.l < 0.0)
-			pixel.l = 0.0;
-		}
+            pixel.l = pixel.l + 0.1;
+            if(pixel.l > 1.0)
+                pixel.l = 1.0;
+            else if(pixel.l < 0.0)
+                pixel.l = 0.0;
+            }
 	}
 }
 /*

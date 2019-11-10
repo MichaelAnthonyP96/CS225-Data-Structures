@@ -20,7 +20,8 @@ public:
 	Image render() const;
 	void increaseCt();
 	void decreaseCt();
-	void getBase();
+	unsigned getCt();
+	Image* getBase();
 private:
 	Image** Sheet;
 	Image* base_;
@@ -28,10 +29,9 @@ private:
 	int * yCoords; 
 	unsigned max_;
 	unsigned stickerCt_;
-	bool[] contain = new bool[max_];
+	//bool* contain;
 	void copy_(const StickerSheet & other);
 	void clear_();
-
-}
+};
 
 #endif

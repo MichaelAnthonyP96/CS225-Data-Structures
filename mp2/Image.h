@@ -14,8 +14,8 @@ class Image : public cs225::PNG{
 	public:
 		Image();//default constructor
 		~Image();//default destructor
-		//Image(const Image &other);//copy constructor
-		//Image const & operator= (Image const & other);//overload '=' operator
+		Image(const Image &other);//copy constructor
+		Image const & operator= (Image const & other);//overload '=' operator
 		Image(unsigned int width, unsigned int height);//two parameter constructor
 		void lighten();
 		void lighten(double amount);
@@ -36,8 +36,8 @@ class Image : public cs225::PNG{
 		unsigned int width_;
 		unsigned int height_;
 		HSLAPixel *imageData_;
-		//HSLAPixel defaultPixel_;
-		//void _copy(Image const & other);
+		HSLAPixel defaultPixel_;
+		void _copy(Image const & other);
 };
 
 #endif

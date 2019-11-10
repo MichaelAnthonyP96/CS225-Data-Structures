@@ -1,4 +1,3 @@
-/*
 #include "../cs225/catch/catch.hpp"
 #include "../Image.h"
 #include "../cs225/PNG.h"
@@ -195,7 +194,7 @@ TEST_CASE("StickerSheet::translate() returns false for a non-existant sticker", 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 20, 200);
 
-  REQUIRE( sheet.translate(3, 20, 200) == false );
+  REQUIRE( !sheet.translate(3, 20, 200) );
 }
 
 
@@ -259,4 +258,3 @@ TEST_CASE("StickerSheet's assignment operator makes an independent copy", "[weig
   REQUIRE( s1.render() == expected2 );
   REQUIRE( s2.render() == expected );
 }
-*/
