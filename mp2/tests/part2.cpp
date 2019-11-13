@@ -7,8 +7,10 @@
 using namespace cs225;
 
 TEST_CASE("A basic StickerSheet works", "[weight=5][part=2]") {
-  Image alma; alma.readFromFile("tests/alma.png");
-  Image i;    i.readFromFile("tests/i.png");
+  Image alma;
+  alma.readFromFile("tests/alma.png");
+  Image i;
+  i.readFromFile("tests/i.png");
 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 20, 200);
@@ -36,7 +38,8 @@ TEST_CASE("StickerSheet::changeMaxStickers() does not discard stickers when resi
 }
 
 TEST_CASE("StickerSheet::changeMaxStickers() does not discard original stickers when resized smaller", "[weight=1][part=2]") {
-  Image alma; alma.readFromFile("tests/alma.png");
+  Image alma;
+  alma.readFromFile("tests/alma.png");
   Image i;    i.readFromFile("tests/i.png");
 
   StickerSheet sheet(alma, 5);

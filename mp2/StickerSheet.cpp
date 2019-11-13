@@ -10,6 +10,7 @@ using namespace std;
 //initializes the StickerSheet
 StickerSheet::StickerSheet(const Image& picture, unsigned max){
 	Sheet = new Image *[max];
+	this->stickerCt_ = 0;
 	this->max_ = max;
 	this->yCoords = new int[max];
 	this->xCoords = new int[max];
@@ -23,7 +24,6 @@ StickerSheet::StickerSheet(const Image& picture, unsigned max){
 }
 // destructor
 StickerSheet::~StickerSheet(){ 
-	//what am I deleting here? the entire base & Sheet?
 	this->clear_();
 }
 // copy constructor
@@ -41,39 +41,36 @@ const StickerSheet& StickerSheet::operator=(const StickerSheet& other){
 // Modifies the maximum number of stickers
 void StickerSheet::changeMaxStickers(unsigned max){
     if(max == this->max_) return;
-	if(max < this->max_){
-		for(unsigned i = max; i < max_; i++){
-			//losing stickers above max-1
-			delete Sheet[i];
-			Sheet[i] = NULL;
+	if(max <= this->max_){
+		for(unsigned i = max; i < max_; ++i){
+			removeSticker(i);
 		}
-	}
-	else{
-		//since max>max_ need to create new bigger arrays
+	} else {
+		//since max>max_ need to create new bigger array
 		Image** newSheet = new Image *[max];
 		int *newxCoords = new int[max];
 		int *newyCoords = new int[max];
-		//initialize the new array to default values
-		for(unsigned j = 0; j < max; j++){
-			newSheet[j] = NULL;
-			newxCoords[j] = 0;
-			newyCoords[j] = 0;
-		}
-		//copy values from the old/smaller array
-		for(unsigned k = 0; k < max; k++){
-			
-		}
+		// Copy over the old stickers to the new larger array
+		for(unsigned j = 0; j < this->stickerCt_; ++j) {
+		    if(Sheet[j] != NULL) {
+                newSheet[j] = new Image(*Sheet[j]);
+                newxCoords[j] = xCoords[j];
+                newyCoords[j] = yCoords[j];
+            }
+        }
+		// assign the new larger array to the current StickerSheet obj
+		this->Sheet = newSheet;
 	} 
 }
 
 int StickerSheet::addSticker(Image & sticker, unsigned x, unsigned y){
-	if(getCt() < max_){
+	if(this->stickerCt_ < max_){
 	    for(unsigned i = 0; i < max_; ++i){
 	        if(Sheet[i] == NULL){
 	            xCoords[i] = x;
 	            yCoords[i] = y;
 	            Sheet[i] = new Image(sticker);
-	            increaseCt();
+	            this->stickerCt_++;
 	            return i;
 	        }
 	    }
@@ -98,24 +95,53 @@ bool StickerSheet::translate(unsigned index, unsigned x, unsigned y){
 }
 
 void StickerSheet::removeSticker(unsigned index){
-	//delete
+	if(index >= max_ || Sheet[index] == NULL) return;
+	else {
+	    delete Sheet[index];
+	    Sheet[index] = NULL;
+	    xCoords[index] = 0;
+	    yCoords[index] = 0;
+	    this->stickerCt_--;
+	}
 }
 
 Image* StickerSheet::getSticker(unsigned index) const{
-	//how to check is the index is invalid
-	return base_;
+	if(index >= max_ || index < 1) return NULL;
+	else return Sheet[index];
 }
 
 Image StickerSheet::render() const{
-	return *base_;
+    Image* canvas = new Image(*(this->base_));
+    unsigned xMax = canvas->width();
+    unsigned yMax = canvas->height();
+    for(unsigned i = 0; i < stickerCt_; ++i){
+        if(Sheet[i] != NULL){
+            unsigned x = xCoords[i] + Sheet[i]->width();
+            unsigned y = yCoords[i] + Sheet[i]->width();
+            xMax = x > xMax ? x : xMax;
+            yMax = y > yMax ? y : yMax;
+        }
+    }
+    canvas->resize(xMax, yMax);
+    for(unsigned i = 0; i < stickerCt_; ++i) {
+        if (Sheet[i] != NULL) {
+            for (unsigned xPos = xCoords[i]; xPos < xCoords[i] + Sheet[i]->width(); ++xPos) {
+                for (unsigned yPos = yCoords[i]; yPos < yCoords[i] + Sheet[i]->height(); ++yPos) {
+                    HSLAPixel canvasPixel = canvas->getPixel(xPos, yPos);
+                    HSLAPixel stickerPixel = Sheet[i]->getPixel(xPos - xCoords[i], yPos - yCoords[i]);
+                    if (canvasPixel.a != 0) {
+                        canvasPixel.h = stickerPixel.h;
+                        canvasPixel.s = stickerPixel.s;
+                        canvasPixel.l = stickerPixel.l;
+                        canvasPixel.a = stickerPixel.a;
+                    }
+                }
+            }
+        }
+    }
+	return *canvas;
 }
 
-void StickerSheet::increaseCt(){
-	this->stickerCt_ = stickerCt_ + 1;
-}
-void StickerSheet::decreaseCt(){
-	this->stickerCt_ = stickerCt_ - 1;
-}
 // returns pointer to base image
 Image* StickerSheet::getBase(){
 	return this->base_;
@@ -152,8 +178,4 @@ void StickerSheet::copy_(const StickerSheet & other){
 		this->xCoords[i] = other.xCoords[i];
 		this->yCoords[i] = other.yCoords[i];
 	}
-}
-
-unsigned StickerSheet::getCt() {
-    return this->stickerCt_;
 }

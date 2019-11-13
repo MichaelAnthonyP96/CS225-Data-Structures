@@ -18,9 +18,6 @@ public:
 	void removeSticker(unsigned index);
 	Image* getSticker(unsigned index) const;
 	Image render() const;
-	void increaseCt();
-	void decreaseCt();
-	unsigned getCt();
 	Image* getBase();
 private:
 	Image** Sheet;

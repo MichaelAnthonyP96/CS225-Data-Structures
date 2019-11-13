@@ -1,0 +1,8 @@
+**.a
+**.make
+**.o
+**.d
+**.xml
+**.cmake
+/cmake-build-debug/**
+/.objs/**
