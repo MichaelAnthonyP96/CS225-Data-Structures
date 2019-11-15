@@ -3,18 +3,16 @@
 #include "cs225/HSLAPixel.h"
 #include <math.h>
 
-Image::Image(){//default constructor
-	width_ = 0;
-	height_ = 0;
-	imageData_ = NULL;
+Image::Image() : PNG() { // default constructor
+    this->imageData_ = NULL;
 }
 
-Image::~Image(){//destructor
-	delete[] imageData_;
+Image::~Image(){ // destructor
+	//delete[] this->cs225::PNG::imageData_;
 }
 
-Image::Image(const Image &other){//copy constructor
-    imageData_ = NULL;
+Image::Image(const Image &other) : PNG(other.getWidth(), other.getHeight()){ // copy constructor
+    // this->cs225::PNG::getData() = NULL;
     this->Image::_copy(other);
 }
 Image const & Image::operator= (Image const & other){
@@ -22,21 +20,22 @@ Image const & Image::operator= (Image const & other){
     return *this;
 }
 
-Image::Image(unsigned int width, unsigned int height) {
-    width_ = width;
-    height_ = height;
-    imageData_ = new HSLAPixel[width * height];
+Image::Image(unsigned int width, unsigned int height) : PNG(width, height) {
+    // width_ = width;
+    // height_ = height;
+    // imageData_ = new HSLAPixel[width * height];
 }
 
-void Image::_copy(Image const & other){
+void Image::_copy(Image const & other) {
 	// Clear self
     delete[] imageData_;
 
+    // resize the imageData array to the new size
+    this->cs225::PNG::resize(other.getWidth(), other.getHeight());
+
     // Copy `other` to self
-    width_ = other.width_;
-    height_ = other.height_;
-    imageData_ = new HSLAPixel[width_ * height_];
-    for (unsigned i = 0; i < width_ * height_; i++) {
+    imageData_ = new HSLAPixel[this->getWidth() * this->getHeight()];
+    for (unsigned i = 0; i < this->getWidth() * this->getHeight(); ++i) {
       imageData_[i] = other.imageData_[i];
     }
 }
@@ -164,7 +163,7 @@ void Image::desaturate(){
 	}
 }
 /*
-Desaturates an Image by decreasing the saturation of every pixel by amount.
+Desaturate an Image by decreasing the saturation of every pixel by amount.
 This function ensures that the saturation remains in the range [0, 1].
 Parameters :amount	(The desired decrease in saturation.)
  */
@@ -214,7 +213,7 @@ void Image::rotateColor(double degrees){
 	}
 }
 }
-//Illinify the image
+// Illinify the image
 void Image::illinify(){
 for(unsigned int x = 0; x < cs225::PNG::width(); x++){
   for(unsigned int y = 0; y < cs225::PNG::height(); y++){
@@ -239,7 +238,7 @@ for(unsigned int x = 0; x < cs225::PNG::width(); x++){
 /*
 Scale the Image by a given factor.
 For example:
-    A factor of 1.0 does not change the iamge.
+    A factor of 1.0 does not change the image.
     A factor of 0.5 results in an image with half the width and half the height.
     A factor of 2 results in an image with twice the width and twice the height.
 This function both resizes the Image and scales the contents.
@@ -296,7 +295,7 @@ Scales the image to fit within the size (w x h).
 This function preserves the aspect ratio of the image, so the result will always be an image of width w or of height h (not necessarily both).
 This function both resizes the Image and scales the contents.
 Parameters
-    w	Desired width of the scaled Iamge
+    w	Desired width of the scaled Image
     h	Desired height of the scaled Image
 */
 void Image::scale(unsigned w, unsigned h){
@@ -311,11 +310,11 @@ void Image::scale(unsigned w, unsigned h){
 	}
 
 }
-//returns Image width
-unsigned int Image::getWidth(){
-	return this->width_;
+// \brief returns Image width
+unsigned int Image::getWidth() const {
+	return this->cs225::PNG::width();
 }
-//returns Image height
-unsigned int Image::getHeight(){
-	return this->height_;
+// \brief returns Image height
+unsigned int Image::getHeight() const {
+	return this->cs225::PNG::height();
 }

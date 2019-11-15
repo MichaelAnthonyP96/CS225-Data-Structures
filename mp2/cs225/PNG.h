@@ -115,16 +115,26 @@ namespace cs225 {
      */
     std::size_t computeHash() const;
 
+    /*
+     * Returns the image data pointer
+     */
+    HSLAPixel*& getData();
+
+
+
   private:
     unsigned int width_;            /*< Width of the image */
     unsigned int height_;           /*< Height of the image */
-    HSLAPixel *imageData_;          /*< Array of pixels */
+      /*< Array of pixels */
     HSLAPixel defaultPixel_;        /*< Default pixel, returned in cases of errors */
 
     /**
      * Copeies the contents of `other` to self
      */
      void _copy(PNG const & other);
+
+  protected:
+      HSLAPixel *imageData_;
   };
 
   std::ostream & operator<<(std::ostream & out, PNG const & pixel);

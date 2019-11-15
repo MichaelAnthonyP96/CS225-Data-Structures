@@ -7,10 +7,19 @@
  */
 
 #include <iostream>
+using std::cerr;
+using std::endl;
+
 #include <string>
+using std::string;
+
+#include <vector>
+using std::vector;
+
 #include <algorithm>
 #include <functional>
 #include <cassert>
+
 #include "lodepng/lodepng.h"
 #include "PNG.h"
 #include "RGB_HSL.h"
@@ -47,7 +56,10 @@ namespace cs225 {
   }
 
   PNG::~PNG() {
-    delete[] imageData_;
+      if(imageData_ != NULL) {
+          delete[] imageData_;
+          imageData_ = NULL;
+      }
   }
 
   PNG const & PNG::operator=(PNG const & other) {
@@ -102,7 +114,7 @@ namespace cs225 {
     unsigned error = lodepng::decode(byteData, width_, height_, fileName);
 
     if (error) {
-      cerr << "PNG decoder error " << error << ": " << lodepng_error_text(error) << endl;
+      cout << "PNG decoder error " << error << ": " << lodepng_error_text(error) << endl;
       return false;
     }
 
@@ -203,6 +215,10 @@ namespace cs225 {
     }
 
     return hash;
+  }
+
+    HSLAPixel*& PNG::getData() {
+      return imageData_;
   }
 
   std::ostream & operator << ( std::ostream& os, PNG const& png ) {

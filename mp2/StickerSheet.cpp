@@ -45,8 +45,9 @@ void StickerSheet::changeMaxStickers(unsigned max){
 		for(unsigned i = max; i < max_; ++i){
 			removeSticker(i);
 		}
+		this->max_ = max;
 	} else {
-		//since max>max_ need to create new bigger array
+		//since max > max_ need to create new bigger array
 		Image** newSheet = new Image *[max];
 		int *newxCoords = new int[max];
 		int *newyCoords = new int[max];
@@ -58,8 +59,17 @@ void StickerSheet::changeMaxStickers(unsigned max){
                 newyCoords[j] = yCoords[j];
             }
         }
-		// assign the new larger array to the current StickerSheet obj
+		// set remaining pointers to NULL
+		for(unsigned k = this->stickerCt_; k < max; ++k){
+		    newSheet[k] = NULL;
+		}
+		// Delete the old sticker array
+		delete[] Sheet;
+		// Assign the new larger array to the current StickerSheet obj
 		this->Sheet = newSheet;
+		this->xCoords = newxCoords;
+		this->yCoords = newyCoords;
+		this->max_ = max;
 	} 
 }
 
@@ -76,17 +86,10 @@ int StickerSheet::addSticker(Image & sticker, unsigned x, unsigned y){
 	    }
 	}
 	return -1;
-    /*Image& temp = &this;
-	while(temp != NULL){
-		temp + sizeof(Image);
-	}
-	*temp = new Image(sticker, x,y);*/
-	//how do I iterate through these pointers, and when I get there how do I place
-	//this sticker there with a x and y initialized to it. Only Stickers have x & y
 }
 
 bool StickerSheet::translate(unsigned index, unsigned x, unsigned y){
-    if(index >= max_ || index < 1) return false; // invalid layer index
+    if(index >= max_ || index < 0 || Sheet[index] == NULL) return false; // invalid layer index
     else{
         xCoords[index] = x;
         yCoords[index] = y;
@@ -106,7 +109,7 @@ void StickerSheet::removeSticker(unsigned index){
 }
 
 Image* StickerSheet::getSticker(unsigned index) const{
-	if(index >= max_ || index < 1) return NULL;
+	if(index >= max_ || index < 0) return NULL;
 	else return Sheet[index];
 }
 
@@ -114,7 +117,7 @@ Image StickerSheet::render() const{
     Image* canvas = new Image(*(this->base_));
     unsigned xMax = canvas->width();
     unsigned yMax = canvas->height();
-    for(unsigned i = 0; i < stickerCt_; ++i){
+    for(unsigned i = 0; i < max_; ++i){
         if(Sheet[i] != NULL){
             unsigned x = xCoords[i] + Sheet[i]->width();
             unsigned y = yCoords[i] + Sheet[i]->height();
@@ -123,7 +126,7 @@ Image StickerSheet::render() const{
         }
     }
     canvas->resize(xMax, yMax);
-    for(unsigned i = 0; i < stickerCt_; ++i) {
+    for(unsigned i = 0; i < max_; ++i) {
         if (Sheet[i] != NULL) {
             for (unsigned xPos = xCoords[i]; xPos < xCoords[i] + Sheet[i]->width(); ++xPos) {
                 for (unsigned yPos = yCoords[i]; yPos < yCoords[i] + Sheet[i]->height(); ++yPos) {
@@ -140,7 +143,7 @@ Image StickerSheet::render() const{
             }
         }
     }
-    canvas->cs225::PNG::writeToFile("BasicStickerSheet.png");
+    canvas->cs225::PNG::writeToFile("BasicStickerSheet2.png");
 	return *canvas;
 }
 
@@ -150,12 +153,16 @@ Image* StickerSheet::getBase(){
 }
 // helper method clear_
 void StickerSheet::clear_(){
-	for(unsigned i = 0; i < max_; ++i){
-	    if(Sheet[i] != NULL){
-            delete Sheet[i];
-            Sheet[i] = NULL;
-	    }
-	}
+    // remove base image
+    delete base_;
+    base_ = NULL;
+    // remove all stickers
+//	for(unsigned i = 0; i < max_; ++i){
+//	    if(Sheet[i] != NULL){
+//            delete Sheet[i];
+//            Sheet[i] = NULL;
+//	    }
+//	}
 	delete[] Sheet;
 	delete[] xCoords;
 	delete[] yCoords;
@@ -170,6 +177,7 @@ void StickerSheet::copy_(const StickerSheet & other){
 	this->base_ = new Image(*other.base_);
 	this->xCoords = new int[max_];
 	this->yCoords = new int[max_];
+	this->Sheet = new Image*[max_];
 	// Sheet = new Image *[max_];
 	for(unsigned i = 0; i < max_; i++){
 		if(other.Sheet[i] != NULL){

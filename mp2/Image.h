@@ -30,13 +30,13 @@ class Image : public cs225::PNG{
 		void illinify();
 		void scale(double factor);
 		void scale(unsigned w, unsigned h);
-		unsigned int getWidth();
-		unsigned int getHeight();
+		unsigned int getWidth() const;
+		unsigned int getHeight() const;
 	private:
-		unsigned int width_;
-		unsigned int height_;
-		HSLAPixel *imageData_;
-		HSLAPixel defaultPixel_;
+		// unsigned int width_;
+		// unsigned int height_;
+		// HSLAPixel *imageData_;
+		// HSLAPixel defaultPixel_;
 		void _copy(Image const & other);
 };
 

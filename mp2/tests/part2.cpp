@@ -36,6 +36,7 @@ TEST_CASE("StickerSheet::changeMaxStickers() does not discard stickers when resi
   Image expected;
   expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
 
+  // bool check = sheet.render() == expected;
   REQUIRE( sheet.render() == expected );
 }
 
@@ -68,6 +69,7 @@ TEST_CASE("StickerSheet::changeMaxStickers() can increase the number of stickers
   Image expected;
   expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected-2.png");
 
+  bool check = sheet.render() == expected;
   REQUIRE( sheet.render() == expected );
 }
 
@@ -95,9 +97,9 @@ TEST_CASE("StickerSheet::changeMaxStickers() discards stickers beyond the end of
 // test removeSticker
 //
 TEST_CASE("StickerSheet::removeSticker() can remove the last sticker", "[weight=1][part=2]") {
-  Image alma;     alma.readFromFile("tests/alma.png");
-  Image i;        i.readFromFile("tests/i.png");
-  Image expected; expected.readFromFile("tests/expected.png");
+  Image alma;     alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;        i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
+  Image expected; expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 20, 200);
@@ -108,9 +110,9 @@ TEST_CASE("StickerSheet::removeSticker() can remove the last sticker", "[weight=
 }
 
 TEST_CASE("StickerSheet::removeSticker() can remove the first sticker", "[weight=1][part=2]") {
-  Image alma;     alma.readFromFile("tests/alma.png");
-  Image i;        i.readFromFile("tests/i.png");
-  Image expected; expected.readFromFile("tests/expected.png");
+  Image alma;     alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;        i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
+  Image expected; expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 50, 200);
@@ -121,9 +123,9 @@ TEST_CASE("StickerSheet::removeSticker() can remove the first sticker", "[weight
 }
 
 TEST_CASE("StickerSheet::removeSticker() can remove all stickers", "[weight=1][part=2]") {
-  Image alma;     alma.readFromFile("tests/alma.png");
-  Image i;        i.readFromFile("tests/i.png");
-  Image expected; expected.readFromFile("tests/expected.png");
+  Image alma;     alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;        i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
+  Image expected; expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 50, 200);
@@ -142,9 +144,9 @@ TEST_CASE("StickerSheet::removeSticker() can remove all stickers", "[weight=1][p
 // test that getSticker works
 //
 TEST_CASE("StickerSheet::getSticker() returns the sticker", "[weight=1][part=2]") {
-  Image alma;     alma.readFromFile("tests/alma.png");
-  Image i;        i.readFromFile("tests/i.png");
-  Image expected; expected.readFromFile("tests/expected.png");
+  Image alma;     alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;        i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
+  Image expected; expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 50, 200);
@@ -152,10 +154,10 @@ TEST_CASE("StickerSheet::getSticker() returns the sticker", "[weight=1][part=2]"
   REQUIRE( *(sheet.getSticker(0)) == i );
 }
 
-TEST_CASE("StickerSheet::getSticker() returns NULL for a non-existant sticker", "[weight=1][part=2]") {
-  Image alma;     alma.readFromFile("tests/alma.png");
-  Image i;        i.readFromFile("tests/i.png");
-  Image expected; expected.readFromFile("tests/expected.png");
+TEST_CASE("StickerSheet::getSticker() returns NULL for a non-existent sticker", "[weight=1][part=2]") {
+  Image alma;     alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;        i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
+  Image expected; expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 50, 200);
@@ -164,9 +166,9 @@ TEST_CASE("StickerSheet::getSticker() returns NULL for a non-existant sticker", 
 }
 
 TEST_CASE("StickerSheet::getSticker() returns NULL for a removed sticker", "[weight=1][part=2]") {
-  Image alma;     alma.readFromFile("tests/alma.png");
-  Image i;        i.readFromFile("tests/i.png");
-  Image expected; expected.readFromFile("tests/expected.png");
+  Image alma;     alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;        i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
+  Image expected; expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 50, 200);
@@ -180,9 +182,9 @@ TEST_CASE("StickerSheet::getSticker() returns NULL for a removed sticker", "[wei
 // translate
 //
 TEST_CASE("StickerSheet::translate() translates a sticker's location", "[weight=1][part=2]") {
-  Image alma;     alma.readFromFile("tests/alma.png");
-  Image i;        i.readFromFile("tests/i.png");
-  Image expected; expected.readFromFile("tests/expected.png");
+  Image alma;     alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;        i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
+  Image expected; expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 0, 0);
@@ -191,10 +193,10 @@ TEST_CASE("StickerSheet::translate() translates a sticker's location", "[weight=
   REQUIRE( sheet.render() == expected );
 }
 
-TEST_CASE("StickerSheet::translate() returns false for a non-existant sticker", "[weight=1][part=2]") {
-  Image alma;     alma.readFromFile("tests/alma.png");
-  Image i;        i.readFromFile("tests/i.png");
-  Image expected; expected.readFromFile("tests/expected.png");
+TEST_CASE("StickerSheet::translate() returns false for a non-existent sticker", "[weight=1][part=2]") {
+  Image alma;     alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;        i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
+  Image expected; expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 20, 200);
@@ -207,9 +209,9 @@ TEST_CASE("StickerSheet::translate() returns false for a non-existant sticker", 
 // render
 //
 TEST_CASE("A complex StickerSheet is correct", "[weight=5][part=2]") {
-  Image alma;     alma.readFromFile("tests/alma.png");
-  Image i;        i.readFromFile("tests/i.png");
-  Image expected; expected.readFromFile("tests/expected-3.png");
+  Image alma;     alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;        i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
+  Image expected; expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected-3.png");
 
   StickerSheet sheet(alma, 100);
   sheet.addSticker(i, 20, 200);
@@ -230,10 +232,10 @@ TEST_CASE("A complex StickerSheet is correct", "[weight=5][part=2]") {
 // copy ctor
 //
 TEST_CASE("StickerSheet's copy constructor makes an independent copy", "[weight=2][part=2]") {
-  Image alma; alma.readFromFile("tests/alma.png");
-  Image i;    i.readFromFile("tests/i.png");
-  Image expected; expected.readFromFile("tests/expected.png");
-  Image expected2; expected2.readFromFile("tests/expected-2.png");
+  Image alma; alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;    i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
+  Image expected; expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
+  Image expected2; expected2.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected-2.png");
 
   StickerSheet s1(alma, 5);
   s1.addSticker(i, 20, 200);
@@ -247,10 +249,10 @@ TEST_CASE("StickerSheet's copy constructor makes an independent copy", "[weight=
 }
 
 TEST_CASE("StickerSheet's assignment operator makes an independent copy", "[weight=2][part=2]") {
-  Image alma; alma.readFromFile("tests/alma.png");
-  Image i;    i.readFromFile("tests/i.png");
-  Image expected; expected.readFromFile("tests/expected.png");
-  Image expected2; expected2.readFromFile("tests/expected-2.png");
+  Image alma; alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;    i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
+  Image expected; expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
+  Image expected2; expected2.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected-2.png");
 
   StickerSheet s1(alma, 5);
   s1.addSticker(i, 20, 200);
