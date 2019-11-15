@@ -8,23 +8,25 @@ using namespace cs225;
 
 TEST_CASE("A basic StickerSheet works", "[weight=5][part=2]") {
   Image alma;
-  alma.readFromFile("tests/alma.png");
+  alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
   Image i;
-  i.readFromFile("tests/i.png");
+  i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 20, 200);
 
   Image expected;
-  expected.readFromFile("tests/expected.png");
+  expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
 
+  system("pwd");
+  bool check = sheet.render() == expected;
   REQUIRE( sheet.render() == expected );
 }
 
 
 TEST_CASE("StickerSheet::changeMaxStickers() does not discard stickers when resized larger", "[weight=1][part=2]") {
-  Image alma; alma.readFromFile("tests/alma.png");
-  Image i;    i.readFromFile("tests/i.png");
+  Image alma; alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;    i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 20, 200);
@@ -32,15 +34,15 @@ TEST_CASE("StickerSheet::changeMaxStickers() does not discard stickers when resi
   sheet.changeMaxStickers(7);
 
   Image expected;
-  expected.readFromFile("tests/expected.png");
+  expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
 
   REQUIRE( sheet.render() == expected );
 }
 
 TEST_CASE("StickerSheet::changeMaxStickers() does not discard original stickers when resized smaller", "[weight=1][part=2]") {
   Image alma;
-  alma.readFromFile("tests/alma.png");
-  Image i;    i.readFromFile("tests/i.png");
+  alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;    i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 20, 200);
@@ -48,14 +50,14 @@ TEST_CASE("StickerSheet::changeMaxStickers() does not discard original stickers 
   sheet.changeMaxStickers(3);
 
   Image expected;
-  expected.readFromFile("tests/expected.png");
+  expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
 
   REQUIRE( sheet.render() == expected );
 }
 
 TEST_CASE("StickerSheet::changeMaxStickers() can increase the number of stickers on an image", "[weight=1][part=2]") {
-  Image alma; alma.readFromFile("tests/alma.png");
-  Image i;    i.readFromFile("tests/i.png");
+  Image alma; alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;    i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
 
   StickerSheet sheet(alma, 1);
   sheet.addSticker(i, 20, 200);
@@ -64,15 +66,15 @@ TEST_CASE("StickerSheet::changeMaxStickers() can increase the number of stickers
   sheet.addSticker(i, 40, 200);
 
   Image expected;
-  expected.readFromFile("tests/expected-2.png");
+  expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected-2.png");
 
   REQUIRE( sheet.render() == expected );
 }
 
 TEST_CASE("StickerSheet::changeMaxStickers() discards stickers beyond the end of a smaller StickerSheet", "[weight=1][part=2]") {
-  Image alma;     alma.readFromFile("tests/alma.png");
-  Image i;        i.readFromFile("tests/i.png");
-  Image expected; expected.readFromFile("tests/expected.png");
+  Image alma;     alma.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/alma.png");
+  Image i;        i.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/i.png");
+  Image expected; expected.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp2/tests/expected.png");
 
   StickerSheet sheet(alma, 5);
   sheet.addSticker(i, 20, 200);

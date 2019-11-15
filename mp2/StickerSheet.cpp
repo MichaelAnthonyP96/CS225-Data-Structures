@@ -117,7 +117,7 @@ Image StickerSheet::render() const{
     for(unsigned i = 0; i < stickerCt_; ++i){
         if(Sheet[i] != NULL){
             unsigned x = xCoords[i] + Sheet[i]->width();
-            unsigned y = yCoords[i] + Sheet[i]->width();
+            unsigned y = yCoords[i] + Sheet[i]->height();
             xMax = x > xMax ? x : xMax;
             yMax = y > yMax ? y : yMax;
         }
@@ -127,18 +127,20 @@ Image StickerSheet::render() const{
         if (Sheet[i] != NULL) {
             for (unsigned xPos = xCoords[i]; xPos < xCoords[i] + Sheet[i]->width(); ++xPos) {
                 for (unsigned yPos = yCoords[i]; yPos < yCoords[i] + Sheet[i]->height(); ++yPos) {
-                    HSLAPixel canvasPixel = canvas->getPixel(xPos, yPos);
-                    HSLAPixel stickerPixel = Sheet[i]->getPixel(xPos - xCoords[i], yPos - yCoords[i]);
-                    if (canvasPixel.a != 0) {
-                        canvasPixel.h = stickerPixel.h;
-                        canvasPixel.s = stickerPixel.s;
-                        canvasPixel.l = stickerPixel.l;
-                        canvasPixel.a = stickerPixel.a;
+                    HSLAPixel& canvasPixel = canvas->getPixel(xPos, yPos);
+                    HSLAPixel& stickerPixel = Sheet[i]->getPixel(xPos - xCoords[i], yPos - yCoords[i]);
+                    if (stickerPixel.a != 0) {
+//                        canvasPixel.h = stickerPixel.h;
+//                        canvasPixel.s = stickerPixel.s;
+//                        canvasPixel.l = stickerPixel.l;
+//                        canvasPixel.a = stickerPixel.a;
+                        canvasPixel = stickerPixel;
                     }
                 }
             }
         }
     }
+    canvas->cs225::PNG::writeToFile("BasicStickerSheet.png");
 	return *canvas;
 }
 

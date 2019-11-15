@@ -7,6 +7,9 @@ add_executable(runPart2 part2.cpp)
 
 target_link_libraries(runPart1 mp2 catch imageManipulation)
 target_link_libraries(runPart2 mp2 catch imageManipulation)
+target_include_directories(runPart2
+        PUBLIC
+            <$BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tests)
 
 add_test(NAME TestP1
         COMMAND ${CMAKE_COMMAND}
