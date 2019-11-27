@@ -129,7 +129,7 @@ namespace cs225 {
     HSLAPixel defaultPixel_;        /*< Default pixel, returned in cases of errors */
 
     /**
-     * Copeies the contents of `other` to self
+     * Copies the contents of `other` to self
      */
      void _copy(PNG const & other);
 

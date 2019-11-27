@@ -1,4 +1,4 @@
-#include "Image.h"
+#include "include/Image.h"
 #include "cs225/PNG.h"
 #include "cs225/HSLAPixel.h"
 #include <math.h>
@@ -12,7 +12,6 @@ Image::~Image(){ // destructor
 }
 
 Image::Image(const Image &other) : PNG(other.getWidth(), other.getHeight()){ // copy constructor
-    // this->cs225::PNG::getData() = NULL;
     this->Image::_copy(other);
 }
 Image const & Image::operator= (Image const & other){
@@ -21,9 +20,6 @@ Image const & Image::operator= (Image const & other){
 }
 
 Image::Image(unsigned int width, unsigned int height) : PNG(width, height) {
-    // width_ = width;
-    // height_ = height;
-    // imageData_ = new HSLAPixel[width * height];
 }
 
 void Image::_copy(Image const & other) {
@@ -217,17 +213,13 @@ void Image::rotateColor(double degrees){
 void Image::illinify(){
 for(unsigned int x = 0; x < cs225::PNG::width(); x++){
   for(unsigned int y = 0; y < cs225::PNG::height(); y++){
-    //Get a reference to the pixel at (x,y):
+    // Get a reference to the pixel at (x,y):
     cs225::HSLAPixel & pixel = this->cs225::PNG::getPixel(x,y);
-    //Check to see if the hue is closer to blue or orange
-    //if(x == 330 && y == 4){
-    //  std::cout << pixel.h << std::endl;
-    //}
+    // Check to see if the hue is closer to blue or orange
     if((pixel.h <= 293.5) && (pixel.h >= 113.5)){
-    //set the pixel to blue
+    // set the pixel to blue
       pixel.h = 216;
     }
-    //else if ((pixel.h > 293.5) || (pixel.h < 113.5)){
     else {
       //set the pixel to orange
       pixel.h = 11;
@@ -255,13 +247,13 @@ void Image::scale(double factor){
 		int newWidth = int(oldWidth * factor); //720
 		int newHeight = int(oldHeight * factor);
 		
-		//rescale the image before or after the depending on if shrinking or expanding
+		// rescale the image before or after the depending on if shrinking or expanding
 		if(factor > 1.0 ){ 
 			this->cs225::PNG::resize(newWidth,newHeight);
 		
 			for(int x = newWidth-1; (x > (-1)); x--){
 		  		for(int y = newHeight-1; (y > (-1)); y--){
-			    //Get a pointer to the pixel at (x,y):
+			    // Get a pointer to the pixel at (x,y):
 			    cs225::HSLAPixel *pixelo = &this->cs225::PNG::getPixel(int(x/factor),int(y/factor));
 			    HSLAPixel *pixeln = &this->cs225::PNG::getPixel(x,y); 
 
@@ -275,7 +267,7 @@ void Image::scale(double factor){
 		else{
 			for(int x = 0; x < oldWidth; x++){
 		  		for(int y = 0; y < oldHeight; y++){
-			    //Get a pointer to the pixel at (x,y):
+			    // Get a pointer to the pixel at (x,y):
 			    cs225::HSLAPixel *pixelo = &this->cs225::PNG::getPixel(x,y);
 			    HSLAPixel *pixeln = &this->cs225::PNG::getPixel(int(x*factor),int(y*factor)); 
 

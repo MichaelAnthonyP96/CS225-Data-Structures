@@ -1,5 +1,5 @@
 #include "../cs225/catch/catch.hpp"
-#include "../Image.h"
+#include "include/Image.h"
 #include "../cs225/PNG.h"
 #include "../cs225/HSLAPixel.h"
 
@@ -38,6 +38,7 @@ TEST_CASE("Image lighten() does not lighten a pixel above 1.0", "[weight=1][part
   
   Image result = createRainbowImage();
   result.lighten();
+  result.writeToFile("testResults/Lighten.png");
 
   REQUIRE( 1.0 == result.getPixel(10, 95).l );
 }
@@ -56,8 +57,10 @@ TEST_CASE("Image darken(0.2) does not darken a pixel below 0.0", "[weight=1][par
   
   Image result = createRainbowImage();
   result.darken(0.2);
+  result.writeToFile("testResults/Darken02.png");
 
-  REQUIRE( 0 == result.getPixel(5, 5).l );
+
+    REQUIRE( 0 == result.getPixel(5, 5).l );
 }
 
 
@@ -69,8 +72,9 @@ TEST_CASE("Image saturate() saturates a pixels by 0.1", "[weight=1][part=1]") {
   
   Image result = createRainbowImage();
   result.saturate();
+  result.writeToFile("testResults/Saturate.png");
 
-  REQUIRE( img.getPixel(10, 10).s + 0.1 == result.getPixel(10, 10).s );
+    REQUIRE( img.getPixel(10, 10).s + 0.1 == result.getPixel(10, 10).s );
 }
 
 
@@ -91,9 +95,11 @@ TEST_CASE("Image rotateColor(double) keeps the hue in the range [0, 360]", "[wei
   
   Image result = createRainbowImage();
   result.rotateColor(90);
+  result.writeToFile("testResults/Rotate90.png");
   REQUIRE( result.getPixel(340, 90).h == 70 );
 
   result.rotateColor(-180);
+  result.writeToFile("testResults/Rotate180.png");
   REQUIRE( result.getPixel(10, 90).h == 280 );
 }
 
@@ -124,6 +130,7 @@ TEST_CASE("Image scale(2) scales pixel data in a reasonable way", "[weight=1][pa
   
   Image result = createRainbowImage();
   result.scale(2);
+  result.writeToFile("testResults/DoubleScale.png");
 
   REQUIRE( result.getPixel(100, 100).h > 40 );
   REQUIRE( result.getPixel(100, 100).h < 60 );
@@ -134,7 +141,7 @@ TEST_CASE("Image scale(0.5) scales pixel data in a reasonable way", "[weight=1][
   
   Image result = createRainbowImage();
   result.scale(0.5);
-
+  result.writeToFile("testResults/HalfScale.png");
   REQUIRE( result.getPixel(100, 20).h > 180 );
   REQUIRE( result.getPixel(100, 20).h < 220 );
 }

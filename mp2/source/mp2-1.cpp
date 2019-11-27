@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Image.h"
+#include "include/Image.h"
 #include <iostream>
 
 using namespace cs225;

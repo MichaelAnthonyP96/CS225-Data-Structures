@@ -1,5 +1,5 @@
-#include "Image.h"
-#include "StickerSheet.h"
+#include "include/Image.h"
+#include "include/StickerSheet.h"
 
 int main() {
 

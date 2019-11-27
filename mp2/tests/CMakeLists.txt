@@ -2,16 +2,40 @@ cmake_minimum_required(VERSION 3.1)
 
 include_directories(${PROJECT_SOURCE_DIR}/cs225/catch/)
 
-add_executable(runPart1 part1.cpp)
-add_executable(runPart2 part2.cpp)
+set ( TEST_ENV_PATH_OPTIONS "PATH=${CMAKE_CURRENT_BINARY_DIR}/../bin:$ENV{PATH}")
+#set ( TEST_ENV_LD_OPTIONS
+#        "LD_LIBRARY_PATH=${CMAKE_CURRENT_BINARY_DIR}/lib:\
+#${CMAKE_CURRENT_BINARY_DIR}/../lib")
 
+# add subdir for the test results
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/testResults)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/ExpectedImages/
+    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/ExpectedImages/)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/SourceImages/
+    DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/SourceImages/)
+
+# Catch testing framework library
+add_library(catch ${PROJECT_SOURCE_DIR}/cs225/catch/catchmain.cpp)
+target_include_directories(catch
+    PUBLIC
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/cs225/catch/>)
+
+add_executable(runPart1 ${CMAKE_CURRENT_SOURCE_DIR}/part1.cpp)
 target_link_libraries(runPart1 mp2 catch imageManipulation)
+target_include_directories(runPart1
+    PUBLIC
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/tests>)
+
+add_executable(runPart2 ${CMAKE_CURRENT_SOURCE_DIR}/part2.cpp)
 target_link_libraries(runPart2 mp2 catch imageManipulation)
 target_include_directories(runPart2
-        PUBLIC
-            <$BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/tests)
+    PUBLIC
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/tests>)
 
 add_test(NAME TestP1
-        COMMAND ${CMAKE_COMMAND}
-        runPart1
-        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+        COMMAND ${PROJECT_BINARY_DIR}/bin/runPart1
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+
+add_test(NAME TestP2
+        COMMAND ${PROJECT_BINARY_DIR}/bin/runPart2
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
