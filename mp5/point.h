@@ -29,13 +29,12 @@ template <int Dim>
 class Point {
   public:
     Point();
-
+    virtual ~Point();
     Point(double arr[Dim]);
     template <typename T>
     explicit Point(T x, ...);
     template <typename T>
     explicit Point(T x0, T x1, T x2);
-
 
     Point& operator=(const Point& other);
 

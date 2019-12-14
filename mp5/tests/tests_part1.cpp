@@ -114,6 +114,34 @@ TEST_CASE("KDTree constructor, 3D (Dim = 3)", "[weight=1][part=1]") {
   _test_linear_constructor<3>(31);
   }
 
+TEST_CASE("KDTree From Example, 2D (Dim = 2)", "[weight=1][part=1]"){
+    Point<2> p1(3,2);
+    Point<2> p2(5,8);
+    Point<2> p3(6,1);
+    Point<2> p4(4,4);
+    Point<2> p5(9,0);
+    Point<2> p6(1,1);
+    Point<2> p7(2,2);
+    Point<2> p8(8,7);
+
+    vector<Point<2>> points;
+    points.push_back(p1);
+    points.push_back(p2);
+    points.push_back(p3);
+    points.push_back(p4);
+    points.push_back(p5);
+    points.push_back(p6);
+    points.push_back(p7);
+    points.push_back(p8);
+
+    KDTree<2> tree(points);
+
+    ofstream outputFile("PersonalTest.kd", ofstream::out);
+    tree.printTree(outputFile, colored_out::DISABLE, -1);
+    outputFile.close();
+
+}
+
 
 //
 // Simple Nearest Neighbor

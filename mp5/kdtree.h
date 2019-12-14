@@ -27,23 +27,22 @@ using std::endl;
  * by the template parameter).
  */
 template <int Dim>
-class KDTree
-{
-  private:
+class KDTree {
+private:
     /**
      * Internal structure for a node of KDTree.
      * Contains left, right children pointers and a K-dimensional point
      */
-    struct KDTreeNode
-    {
-      Point<Dim> point;
-      KDTreeNode *left, *right;
+    struct KDTreeNode {
+        Point<Dim> point;
+        KDTreeNode *left, *right;
 
-      KDTreeNode() : point(), left(NULL), right(NULL) {}
-      KDTreeNode(const Point<Dim> &point) : point(point), left(NULL), right(NULL) {}
+        KDTreeNode() : point(), left(NULL), right(NULL) {}
+
+        KDTreeNode(const Point<Dim> &point) : point(point), left(NULL), right(NULL) {}
     };
 
-  public:
+public:
     /**
      * Determines if Point a is smaller than Point b in a given dimension d.
      * If there is a tie, break it with Point::operator<().
@@ -63,7 +62,7 @@ class KDTree
      * @return A boolean value indicating whether the first Point is smaller
      *  than the second Point in the curDim dimension.
      */
-    bool smallerDimVal(const Point<Dim>& first, const Point<Dim>& second,
+    bool smallerDimVal(const Point<Dim> &first, const Point<Dim> &second,
                        int curDim) const;
 
     /**
@@ -104,8 +103,8 @@ class KDTree
      *  to target than currentBest. Ties should be broken with
      *  Point::operator<().
      */
-    bool shouldReplace(const Point<Dim>& target, const Point<Dim>& currentBest,
-                       const Point<Dim>& potential) const;
+    bool shouldReplace(const Point<Dim> &target, const Point<Dim> &currentBest,
+                       const Point<Dim> &potential) const;
 
     /**
      * Constructs a KDTree from a vector of Points, each having dimension Dim.
@@ -151,7 +150,7 @@ class KDTree
      * @todo This function is required for MP 5.1.
      * @param newPoints The vector of points to build your KDTree off of.
      */
-    KDTree(const vector<Point<Dim>>& newPoints);
+    KDTree(const vector<Point<Dim>> &newPoints);
 
 
     /**
@@ -159,7 +158,7 @@ class KDTree
      *
      * @param other The KDTree to copy.
      */
-    KDTree(const KDTree& other);
+    KDTree(const KDTree &other);
 
     /**
      * Assignment operator for KDTree.
@@ -167,7 +166,7 @@ class KDTree
      * @param rhs The right hand side of the assignment statement.
      * @return A reference for performing chained assignments.
      */
-    KDTree const &operator=(const KDTree& rhs);
+    KDTree const &operator=(const KDTree &rhs);
 
     /**
      * Destructor for KDTree.
@@ -231,7 +230,7 @@ class KDTree
      *  tree.
      * @return The closest point to a in the KDTree.
      */
-    Point<Dim> findNearestNeighbor(const Point<Dim>& query) const;
+    Point<Dim> findNearestNeighbor(const Point<Dim> &query) const;
 
     // functions used for grading:
 
@@ -240,30 +239,49 @@ class KDTree
      *  kdtree_extras.cpp.
      * Prints the KDTree to the terminal in a pretty way.
      */
-    void printTree(ostream& out = cout,
+    void printTree(ostream &out = cout,
                    colored_out::enable_t enable_bold = colored_out::COUT,
                    int modWidth = -1) const;
 
-  private:
+private:
 
     /** Internal representation, root and size **/
     KDTreeNode *root;
     size_t size;
 
     /** Helper function for grading */
-    int getPrintData(KDTreeNode * subroot) const;
+    int getPrintData(KDTreeNode *subroot) const;
 
     /** Helper function for grading */
-    void printTree(KDTreeNode * subroot, std::vector<std::string>& output,
+    void printTree(KDTreeNode *subroot, std::vector<std::string> &output,
                    int left, int top, int width, int currd) const;
 
     /**
      * @todo Add your helper functions here.
      */
-    /*Helper function for shouldReplace. This function calculates the Euclidean 
-     *Squared distance between two templated Points. This function returns an integer.
+
+    /**
+     * Helper function for shouldReplace. This function calculates the Euclidean
+     * Squared distance between two templated Points. This function returns an integer.
      */
-    int calculateDistance(const Point<Dim>& p1, const Point<Dim>& p2)const;
+    int calculateDistance(const Point<Dim> &p1, const Point<Dim> &p2) const;
+
+    /**
+     * Helper function to partition during quickselect
+     */
+    int partition(vector<Point<Dim>> &Points, int left, int right, int pivotIndex, int dimension);
+
+    /**
+     * QuickSelect funcion
+     */
+    Point<Dim> quickSelect(vector<Point<Dim>> &Points, int left, int right, int k, int dimension);
+
+    void buildKDTree(vector<Point<Dim>> &otherPoints, int left, int right, int dimension, KDTreeNode *&root);
+
+    bool isLeaf(KDTreeNode* root) const;
+
+    Point<Dim> nearestNeighborHelper(const Point<Dim>& query, KDTreeNode* root, int dim) const;
+
 };
 
 #include "kdtree.cpp"
