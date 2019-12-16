@@ -140,7 +140,10 @@ Point<Dim> KDTree<Dim>::nearestNeighborHelper(const Point<Dim>& query, KDTreeNod
             double radius = calculateDistance(found, query);
             double planeDistance = (root->point[dim] - query[dim]) * (root->point[dim] - query[dim]);
             if (radius >= planeDistance && root->right != NULL) {
-                found = nearestNeighborHelper(query, root->right, (dim + 1) % Dim);
+                Point<Dim> tmp = nearestNeighborHelper(query, root->right, (dim + 1) % Dim);
+                if(shouldReplace(query, found, tmp)){
+                    found = tmp;
+                }
             }
         } else {
             found = root->point;
@@ -155,7 +158,10 @@ Point<Dim> KDTree<Dim>::nearestNeighborHelper(const Point<Dim>& query, KDTreeNod
             double radius = calculateDistance(found, query);
             double planeDistance = (root->point[dim] - query[dim]) * (root->point[dim] - query[dim]);
             if (radius >= planeDistance && root->left != NULL) {
-                found = nearestNeighborHelper(query, root->left, (dim + 1) % Dim);
+                Point<Dim> tmp = nearestNeighborHelper(query, root->left, (dim + 1) % Dim);
+                if(shouldReplace(query, found, tmp)){
+                    found = tmp;
+                }
             }
         } else {
             found = root->point;
