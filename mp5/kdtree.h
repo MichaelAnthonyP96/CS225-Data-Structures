@@ -282,6 +282,10 @@ private:
 
     Point<Dim> nearestNeighborHelper(const Point<Dim>& query, KDTreeNode* root, int dim) const;
 
+    void _copy(KDTreeNode*& self, KDTreeNode*& other);
+
+    void _delete(KDTreeNode*& root);
+
 };
 
 #include "kdtree.cpp"

@@ -97,6 +97,7 @@ KDTree<Dim>::KDTree(const KDTree& other) {
   /**
    * @todo Implement this function!
    */
+   _copy(root,other->root);
 }
 
 template <int Dim>
@@ -104,7 +105,8 @@ const KDTree<Dim>& KDTree<Dim>::operator=(const KDTree& rhs) {
   /**
    * @todo Implement this function!
    */
-
+   _delete(root);
+   _copy(root, rhs->root);
   return *this;
 }
 
@@ -113,6 +115,7 @@ KDTree<Dim>::~KDTree() {
   /**
    * @todo Implement this function!
    */
+   _delete(root);
 }
 
 template <int Dim>
@@ -230,3 +233,22 @@ bool KDTree<Dim>::isLeaf(KDTreeNode *root) const {
     }
 }
 
+template<int Dim>
+void KDTree<Dim>::_copy(KDTreeNode*& self, KDTreeNode*& other){
+    // Base case
+    if(other == NULL){
+        return;
+    }
+    self = new KDTreeNode(other->point);
+    copy(self->left, other->left);
+    copy(self->right, other->right);
+}
+
+template<int Dim>
+void KDTree<Dim>::_delete(KDTreeNode*& root){
+    if(root == NULL)
+        return;
+    delete(root->left);
+    delete(root->right);
+    delete root;
+}
