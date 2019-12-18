@@ -264,7 +264,7 @@ private:
      * Helper function for shouldReplace. This function calculates the Euclidean
      * Squared distance between two templated Points. This function returns an integer.
      */
-    int calculateDistance(const Point<Dim> &p1, const Point<Dim> &p2) const;
+    double calculateDistance(const Point<Dim> &p1, const Point<Dim> &p2) const;
 
     /**
      * Helper function to partition during quickselect

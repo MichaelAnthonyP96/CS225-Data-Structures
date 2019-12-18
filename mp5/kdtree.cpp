@@ -38,9 +38,9 @@ bool KDTree<Dim>::shouldReplace(const Point<Dim>& target,
      * @todo Implement this function!
      */
 	//calculate the distance between the target and currentBest
-	int d1 = calculateDistance(target, currentBest);
+	double d1 = calculateDistance(target, currentBest);
 	//calculate the distance between the target and potential
-	int d2 = calculateDistance(target, potential);
+	double d2 = calculateDistance(target, potential);
 	//if the two distances are equal, break the tie using the overloaded operator
 	if(d1 == d2){
 		return potential < currentBest;
@@ -51,8 +51,8 @@ bool KDTree<Dim>::shouldReplace(const Point<Dim>& target,
 }
 
 template <int Dim>
-int KDTree<Dim>::calculateDistance(const Point<Dim>& p1, const Point<Dim>& p2)const{
-	int distance = 0;
+double KDTree<Dim>::calculateDistance(const Point<Dim>& p1, const Point<Dim>& p2)const{
+	double distance = 0;
 	//loop over all dimensions in the Points
 	for(int i = 0; i < Dim; ++i){
 		distance += (p1[i] - p2[i]) * (p1[i] - p2[i]);

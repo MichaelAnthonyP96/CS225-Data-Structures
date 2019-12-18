@@ -16,7 +16,7 @@ using namespace cs225;
 TEST_CASE("Creates a basic MosaicCanvas (gridtest)", "[weight=5][part=2]") {
   // Read `tests/gridtest.png` from disk
   PNG sourcePNG;
-  sourcePNG.readFromFile("tests/gridtest.png");
+  sourcePNG.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp5/tests/gridtest.png");
   SourceImage source(sourcePNG, 8);
 
   // Create a list of images to choose from to make our mosaic.  As a basic
