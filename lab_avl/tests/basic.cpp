@@ -1,6 +1,6 @@
 #include "../cs225/catch/catch.hpp"
 
-#include "../avltree.h"
+#include "avltree.h"
 #include <vector>
 #include <iostream>
 #include <sstream>

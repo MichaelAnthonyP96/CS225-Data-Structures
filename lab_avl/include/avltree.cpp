@@ -30,18 +30,22 @@ void AVLTree<K, V>::rotateLeft(Node*& t)
 {
     functionCalls.push_back("rotateLeft"); // Stores the rotation name (don't remove this)
     // your code here
-    //alocate a temporary Pivot Node pointer
+    if(t == NULL || t->right == NULL){
+      return;
+    }
+
+    // allocate a temporary Pivot Node pointer
     Node* Pivot = t->right;
-    //perform left rotation as described in lecture
-    //detach Pivot from the rest of the tree
+    // perform left rotation as described in lecture
+    // detach Pivot from the rest of the tree
     t->right = Pivot->left;
-    //reatch Pivot atop the old node
+    // reattach Pivot atop the old node
     Pivot->left = t;
-    //recalculate the height of the new subtree
+    // recalculate the height of the new subtree
     t->height = max(heightOrNeg1(t->left),heightOrNeg1(t->right)) + 1;
-    //attach the correctly pivoted subtree back to the original root
+    // attach the correctly pivoted subtree back to the original root
     t = Pivot;
-    //recalculate the height of the new correctly pivoted subtree
+    // recalculate the height of the new correctly pivoted subtree
     t->height = max(heightOrNeg1(t->left),heightOrNeg1(t->right)) + 1;
 }
 
@@ -59,16 +63,21 @@ void AVLTree<K, V>::rotateRight(Node*& t)
 {
     functionCalls.push_back("rotateRight"); // Stores the rotation name (don't remove this)
     // your code here
-    //alocate a temporary Pivot Node pointer
+
+    if(t == NULL || t->left == NULL){
+      return;
+    }
+
+    // allocate a temporary Pivot Node pointer
     Node* Pivot = t->left;
-    //perform right rotation as described in lecture
-    //detach Pivot from the rest of the tree
+    // perform right rotation as described in lecture
+    // detach Pivot from the rest of the tree
     t->left = Pivot->right;
-    //reatch Pivot atop the old node
+    // re-attach Pivot atop the old node
     Pivot->right = t;
-    //recalculate the height of the new subtree
+    // recalculate the height of the new subtree
     t->height = max(heightOrNeg1(t->left),heightOrNeg1(t->right)) + 1;
-    //attach the correctly pivoted subtree back to the original root
+    // attach the correctly pivoted subtree back to the original root
     t = Pivot;
     //recalculate the height of the new correctly pivoted subtree
     t->height = max(heightOrNeg1(t->left),heightOrNeg1(t->right)) + 1;
@@ -99,7 +108,9 @@ void AVLTree<K, V>::rebalance(Node*& subtree)
 
     if ((left - right) > 1){
       if(subtree->left != NULL){
-        if(subtree->left->right->height > subtree->left->left->height){
+        int left = heightOrNeg1(subtree->left->left);
+        int right = heightOrNeg1(subtree->left->right);
+        if(right > left){
            return rotateLeftRight(subtree);
          }
        }
@@ -107,7 +118,9 @@ void AVLTree<K, V>::rebalance(Node*& subtree)
     }
     if((left - right) < -1){
       if(subtree->right != NULL){
-        if(subtree->right->left->height > subtree->right->right->height){
+        int right = heightOrNeg1(subtree->right->right);
+        int left = heightOrNeg1(subtree->right->left);
+        if(right > left){
          return rotateRightLeft(subtree);
         }
       }
@@ -195,6 +208,7 @@ void AVLTree<K, V>::remove(Node*& subtree, const K& key)
             /* no-child remove */
             // your code here
             //set the pointer by reference to NULL
+            delete subtree;
             subtree = NULL;
             //immediately return to save time
             return;
