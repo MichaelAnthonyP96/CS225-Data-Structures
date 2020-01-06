@@ -227,7 +227,9 @@ class AVLTree
      */
     void getInorderTraversal(const Node* subRoot);
 
-    // Node* inOrderPredecessor(Node* subtree);
+    Node*& inOrderPredecessor(Node*& subtree);
+
+    int calculateHeight(Node*& subtree);
 
     /** This variable is used for grading. */
     ostream* _out;

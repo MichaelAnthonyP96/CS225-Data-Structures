@@ -76,11 +76,11 @@ void AVLTree<K, V>::rotateRight(Node*& t)
     // re-attach Pivot atop the old node
     Pivot->right = t;
     // recalculate the height of the new subtree
-    t->height = max(heightOrNeg1(t->left),heightOrNeg1(t->right)) + 1;
+    calculateHeight(t);
     // attach the correctly pivoted subtree back to the original root
     t = Pivot;
     //recalculate the height of the new correctly pivoted subtree
-    t->height = max(heightOrNeg1(t->left),heightOrNeg1(t->right)) + 1;
+    calculateHeight(t);
 }
 
 template <class K, class V>
@@ -97,6 +97,9 @@ template <class K, class V>
 void AVLTree<K, V>::rebalance(Node*& subtree)
 {
     // your code here
+    if(subtree == NULL) return;
+    calculateHeight(subtree);
+
     int right,left;
     if(subtree->right == NULL && subtree->left == NULL) return;
 
@@ -108,9 +111,8 @@ void AVLTree<K, V>::rebalance(Node*& subtree)
 
     if ((left - right) > 1){
       if(subtree->left != NULL){
-        int left = heightOrNeg1(subtree->left->left);
-        int right = heightOrNeg1(subtree->left->right);
-        if(right > left){
+        int balance = heightOrNeg1(subtree->left->left) - heightOrNeg1(subtree->left->right);
+        if(balance < 0){
            return rotateLeftRight(subtree);
          }
        }
@@ -118,9 +120,8 @@ void AVLTree<K, V>::rebalance(Node*& subtree)
     }
     if((left - right) < -1){
       if(subtree->right != NULL){
-        int right = heightOrNeg1(subtree->right->right);
-        int left = heightOrNeg1(subtree->right->left);
-        if(right > left){
+        int balance = heightOrNeg1(subtree->right->left) - heightOrNeg1(subtree->right->right);
+        if(balance > 0){
          return rotateRightLeft(subtree);
         }
       }
@@ -181,72 +182,75 @@ template <class K, class V>
 void AVLTree<K, V>::remove(Node*& subtree, const K& key)
 {
     if (subtree == NULL){
-        //rebalance(subtree);
         return;
     }
     if (key < subtree->key) {
         // your code here
         //recursive call to find the key in the subtree
         remove(subtree->left,key);
-        //rebalance the tree as the recursion unwinds
+        // rebalance the tree as the recursion unwinds
         rebalance(subtree);
-        if(subtree->left != NULL && subtree->right != NULL){
-          subtree->height = 1 + max(subtree->left->height,subtree->right->height);
-        }
     } else if (key > subtree->key) {
         // your code here
-        //recursive call to find the key in the subtree
+        // recursive call to find the key in the subtree
         remove(subtree->right,key);
-        //rebalance the tree as the recusrion unwinds
+        // rebalance the tree as the recursion unwinds
         rebalance(subtree);
-        if(subtree->left != NULL && subtree->right != NULL){
-          subtree->height = 1 + max(subtree->left->height,subtree->right->height);
-        }
     } else {
-        //Since we know the key exists, we've found the key
+        // Since we know the key exists, we've found the key
         if (subtree->left == NULL && subtree->right == NULL) {
             /* no-child remove */
             // your code here
-            //set the pointer by reference to NULL
+            // set the pointer by reference to NULL
             delete subtree;
             subtree = NULL;
-            //immediately return to save time
-            return;
         } else if (subtree->left != NULL && subtree->right != NULL) {
             /* two-child remove */
             // your code here
-            //find the IOP
-            Node* IOP = (subtree->left);
-            while(IOP->right != NULL) IOP = IOP->right;
-            //swap the IOP and the subtree pointers
-            swap(subtree,IOP);
-            //delete the subtree pointer and set it equal to NULL
-            delete subtree;
-            subtree = NULL;
-            rebalance(IOP);
-            //immediately return to save time
-            return;
+            // find the In Order Predecessor
+            Node*& IOP = inOrderPredecessor(subtree->left);
+            // swap the IOP and the subtree pointers
+            swap(IOP,subtree);
+            // delete the IOP pointer and set it equal to NULL
+            delete IOP;
+            IOP = NULL;
+            calculateHeight(subtree->left);
         } else {
             /* one-child remove */
             // your code here
-            //only a left child
+            // only a left child
             if(subtree->left != NULL){
-              //temp to hold the subtree left child, we would lose access to it without the temp
+              // temp to hold the subtree left child, we would lose access to it without the temp
               Node* temp = subtree->left;
               delete subtree;
               subtree = temp;
-              //immediately return
-              return;
             }
-            //only a right child
+            // only a right child
             else if(subtree->right != NULL){
-              //temp to hold the subtree right child, we would lose access to it without the temp
+              // temp to hold the subtree right child, we would lose access to it without the temp
               Node * temp = subtree->right;
               delete subtree;
               subtree = temp;
-              //immediately return
-              return;
             }
         }
+        rebalance(subtree);
     }
+}
+
+template <class K, class V>
+typename AVLTree<K, V>::Node*& AVLTree<K, V>::inOrderPredecessor(AVLTree<K, V>::Node*& subtree){
+  return subtree->right == NULL ? subtree : inOrderPredecessor(subtree->right);
+}
+
+template <class K, class V>
+int AVLTree<K, V>::calculateHeight(Node*& subtree){
+  if (subtree->left == NULL && subtree->right == NULL) {
+    subtree->height = 0;
+  } else if (subtree->left  == NULL) {
+    subtree->height = subtree->right->height + 1;
+  } else if (subtree->right == NULL) {
+    subtree->height = subtree->left->height  + 1;
+  } else {
+    subtree->height = max(subtree->right->height, subtree->left->height) + 1;
+  }
 }

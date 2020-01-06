@@ -99,12 +99,12 @@ void AVLTree<K, V>::clear(Node* subRoot)
 template <class K, class V>
 void AVLTree<K, V>::swap(Node*& first, Node*& second)
 {
-    K tempkey = first->key;
-    V tempvalue = first->value;
+    K tempKey = first->key;
+    V tempValue = first->value;
     first->key = second->key;
     first->value = second->value;
-    second->key = tempkey;
-    second->value = tempvalue;
+    second->key = tempKey;
+    second->value = tempValue;
 }
 
 // class for generic printing

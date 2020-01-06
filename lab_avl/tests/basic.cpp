@@ -189,6 +189,10 @@ TEST_CASE("test_remove_big", "[weight=10][valgrind]") {
         tree.insert(p.first, p.second);
     }
 
+    std::stringstream insertSS;
+    std::ofstream FS("treeAfterInserts.txt");
+    tree.print( insertSS , false);
+    FS << insertSS.rdbuf();
 
     vector<string> solnFuncCalls =
     {
@@ -212,6 +216,11 @@ TEST_CASE("test_remove_big", "[weight=10][valgrind]") {
         tree.remove(r);
     }
 
+    std::stringstream removeSS;
+    std::ofstream removeFS("treeAfterRemovals.txt");
+    tree.print( removeSS , false);
+    removeFS << removeSS.rdbuf();
+
     vector<int> solnTraversal =
     {
         1, 3, 11, 17, 18, 23, 24, 26, 31, 36, 41, 42, 45, 74, 78, 82, 87, 92, 93, 96
@@ -221,7 +230,9 @@ TEST_CASE("test_remove_big", "[weight=10][valgrind]") {
     stringstream str;
     tree.print(str, false);
 
-
+    std::ofstream fs("treeOutput.txt");
+    tree.print( fs , false);
+    // fs.close();
     REQUIRE(solnFuncCalls == funcCalls);
 
     REQUIRE(solnTraversal == inorderTraversal);
