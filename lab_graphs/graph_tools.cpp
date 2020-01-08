@@ -197,28 +197,33 @@ void GraphTools::findMST(Graph& graph)
 	*	Inspect the current edge. If that edge connects two vertices from different sets, union their respective sets and mark the edge as part of the MST. Otherwise there would be a cycle, so do nothing.
     *	Repeat this until n−1 edges have been added, where n is the number of vertices in the graph.
     */
-	(void) graph;
-    //get all edges in the graph
-    /*
-    vector<Edge> ve = graph.getEdges();
-    //get all the vertices in the graph
+
+    // get all the vertices in the graph
     vector<Vertex> v = graph.getVertices();
-    //sort the edges in increasing order by their edge weights
-    sort(ve.begin(), ve.end(),sortEdge);
-    //create a default disjointSets object
-    DisjointSets verticeSets;
-    //now initialize all the sets within the DisjointSets vector to -1
-    verticeSets.addElem(v.size());
-    //iterate over all of the graph's edges
+    // map which takes a vertex as the key and the set number as the value
+    unordered_map<Vertex, int> map;
+    // get all edges in the graph
+    vector<Edge> ve = graph.getEdges();
+    // sort the edges in increasing order by their edge weights
+    sort(ve.begin(), ve.end(), sortEdge);
+    // assign each vertex a number
+    for(size_t i = 0; i < v.size(); ++i)
+      map[v[i]] = i;
+
+    // create a default disjointSets object
+    DisjointSets vertexSets;
+    // now initialize all the sets within the DisjointSets vector to -1
+    vertexSets.addelements(v.size());
+    // iterate over all of the graph's edges
     for(size_t i = 0; i < ve.size(); ++i){
-    	//if two edges are not in the same set, then union them
-    	if( verticeSets.find((ve[i]).source) != verticeSets.find((ve[i]).dest) ){
-    		//mark the edge as apart of the Minimum spanning tree
+    	// if two vertices are not in the same set, then union them
+    	if( vertexSets.find(map[(ve[i]).source]) != vertexSets.find(map[(ve[i]).dest]) ){
+    		// mark the edge as apart of the Minimum spanning tree
     		graph.setEdgeLabel(ve[i].source, ve[i].dest, "MST");
-    		//Union the two sets since the are not in the same set
-    		verticeSets.UBS(ve[i].source,ve[i].dest);
+    		// Union the two sets since the are not in the same set
+    		vertexSets.setunion(map[ve[i].source], map[ve[i].dest]);
     	}
-    }*/
+    }
 }
 
 void GraphTools::markUnexplored(Graph& g){
