@@ -25,22 +25,29 @@
  * @param startingTokens The number of starting tokens in the game of Nim.
  */
 NimLearner::NimLearner(unsigned startingTokens) : g_(true, true) {
-    /* Your code goes here! */
-  //check if the number of startingTokens is even
-  //if(startingTokens % 2 == 1) return;
-  //insert the tokens into the graph
-  Vertex *v1 = new Vertex[startingTokens];
-  Vertex *v2 = new Vertex[startingTokens];
+  /* Your code goes here! */
+  // if you have ten tokens, you have 11 states including zero.
+  Vertex *v1 = new Vertex[startingTokens + 1];
+  Vertex *v2 = new Vertex[startingTokens + 1];
+  // insert the tokens into the graph
   for(unsigned i = 0; i < startingTokens; ++i){
     g_.insertVertex(v1[i]);
     g_.insertVertex(v2[i]);
-    g_.setVertexLabel(v1[i],"p1-" + std::to_string(i+1) );
-    g_.setVertexLabel(v2[i],"p2-" + std::to_string(i+1) );
+    // set the appropriate vertex name
+    g_.setVertexLabel(v1[i],"p1-" + std::to_string(i) );
+    g_.setVertexLabel(v2[i],"p2-" + std::to_string(i) );
 
-    std::cout << "p1-" + std::to_string(i+1) << std::endl;
-    std::cout << "p2-" + std::to_string(i+1) << std::endl;
+    std::cout << "p1-" + std::to_string(i) << std::endl;
+    std::cout << "p2-" + std::to_string(i) << std::endl;
+
+    // insert the two edges connected to each vertex
+    for(size_t j = i + 2; j > i; --j) {
+      if(j < startingTokens) {
+        g_.insertEdge(v2[j], v1[i]);
+        g_.insertEdge(v1[j], v2[i]);
+      }
+    }
   }
-
 }
 
 /**
