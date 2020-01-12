@@ -8,7 +8,7 @@
 #include <cstdlib>
 
 #include "mosaiccanvas.h"
-#include "util/util.h"
+#include "util.h"
 
 using namespace std;
 using namespace util;

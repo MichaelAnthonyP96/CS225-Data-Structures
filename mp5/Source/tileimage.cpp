@@ -10,8 +10,8 @@
 #include <cmath>
 
 #include "tileimage.h"
-#include "cs225/PNG.h"
-#include "cs225/HSLAPixel.h"
+#include "PNG.h"
+#include "HSLAPixel.h"
 
 using namespace std;
 using namespace cs225;

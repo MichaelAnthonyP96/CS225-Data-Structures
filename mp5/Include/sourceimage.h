@@ -15,7 +15,7 @@
 #define _SOURCEIMAGE_H
 
 #include <stdint.h>
-#include "cs225/PNG.h"
+#include "PNG.h"
 
 using namespace std;
 using namespace cs225;

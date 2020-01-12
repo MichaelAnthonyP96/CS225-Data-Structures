@@ -5,15 +5,13 @@
  */
 
 #include <unistd.h>
-#include <sstream>
 #include <iostream>
 #include <vector>
 #include <string>
 #include <algorithm>
 #include <iomanip>
 #include <stdexcept>
-#include "util/no_sort.h"
-#include "util/coloredout.h"
+#include "coloredout.h"
 #include "point.h"
 #include "kdtree.h"
 

@@ -13,7 +13,7 @@
 #define _KDTREE_H_
 
 #include <vector>
-#include "util/coloredout.h"
+#include "coloredout.h"
 #include "point.h"
 
 using std::vector;

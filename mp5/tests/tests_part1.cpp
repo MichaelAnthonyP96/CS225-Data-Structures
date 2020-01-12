@@ -7,8 +7,8 @@
 #include <cctype>
 #include <locale>
 
-#include "../kdtree.h"
-#include "../point.h"
+#include "kdtree.h"
+#include "point.h"
 
 // https://stackoverflow.com/a/217605
 // trim from end (in place)
@@ -97,13 +97,13 @@ void _test_linear_constructor(int size) {
 
   KDTree<K> tree(points);
 
-  std::string fname = "test_result_kdtree_"+to_string(size)+".kd";
+  std::string fname = "testResults/test_result_kdtree_"+to_string(size)+".kd";
 
   ofstream outputFile(fname, ofstream::out);
   tree.printTree(outputFile, colored_out::DISABLE, -1);
   outputFile.close();
 
-  compareBinaryFiles(fname, "tests/expected_kdtree_"+to_string(size)+".kd" );
+  compareBinaryFiles(fname, "expected/expected_kdtree_"+to_string(size)+".kd" );
 }
 
 TEST_CASE("KDTree constructor, 1D (Dim=1)", "[weight=1][part=1]") {
@@ -136,7 +136,7 @@ TEST_CASE("KDTree From Example, 2D (Dim = 2)", "[weight=1][part=1]"){
 
     KDTree<2> tree(points);
 
-    ofstream outputFile("PersonalTest.kd", ofstream::out);
+    ofstream outputFile("testResults/PersonalTest.kd", ofstream::out);
     tree.printTree(outputFile, colored_out::DISABLE, -1);
     outputFile.close();
 

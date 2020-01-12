@@ -14,7 +14,7 @@
 #include <vector>
 
 // included specifically for MP6
-#include "../point.h"
+#include "Include/point.h"
 
 using std::endl;
 using std::cerr;

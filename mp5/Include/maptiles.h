@@ -13,7 +13,7 @@
 
 #include <map>
 #include <vector>
-#include "cs225/PNG.h"
+#include "PNG.h"
 #include "kdtree.h"
 #include "mosaiccanvas.h"
 #include "sourceimage.h"

@@ -14,7 +14,7 @@
 #define MOSAICCANVAS_H
 
 #include <vector>
-#include "cs225/PNG.h"
+#include "PNG.h"
 #include "tileimage.h"
 
 using namespace std;

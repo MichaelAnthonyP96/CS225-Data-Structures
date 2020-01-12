@@ -8,8 +8,8 @@
 
 #include <math.h>
 #include <stdint.h>
-#include "cs225/PNG.h"
-#include "cs225/HSLAPixel.h"
+#include "PNG.h"
+#include "HSLAPixel.h"
 
 using namespace cs225;
 

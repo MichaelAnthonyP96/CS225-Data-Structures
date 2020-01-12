@@ -2,11 +2,11 @@
 #include <set>
 #include <vector>
 
-#include "cs225/PNG.h"
+#include "PNG.h"
 #include "maptiles.h"
 #include "mosaiccanvas.h"
 #include "sourceimage.h"
-#include "util/util.h"
+#include "util.h"
 
 using namespace std;
 using namespace util;

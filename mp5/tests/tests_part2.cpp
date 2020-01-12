@@ -1,14 +1,12 @@
-#include "../cs225/catch/catch.hpp"
+#include "catch.hpp"
 
 #include <algorithm>
-#include <iostream>
-#include <string>
 #include <vector>
 
-#include "../cs225/PNG.h"
-#include "../cs225/HSLAPixel.h"
-#include "../maptiles.h"
-#include "../mosaiccanvas.h"
+#include "PNG.h"
+#include "HSLAPixel.h"
+#include "maptiles.h"
+#include "mosaiccanvas.h"
 
 using namespace cs225;
 
@@ -16,7 +14,7 @@ using namespace cs225;
 TEST_CASE("Creates a basic MosaicCanvas (gridtest)", "[weight=5][part=2]") {
   // Read `tests/gridtest.png` from disk
   PNG sourcePNG;
-  sourcePNG.readFromFile("/Users/michaelanthonypope/Documents/GitHub/CS225-Data-Structures/mp5/tests/gridtest.png");
+  sourcePNG.readFromFile("Images/gridtest.png");
   SourceImage source(sourcePNG, 8);
 
   // Create a list of images to choose from to make our mosaic.  As a basic
@@ -36,10 +34,10 @@ TEST_CASE("Creates a basic MosaicCanvas (gridtest)", "[weight=5][part=2]") {
   REQUIRE( canvas != NULL );
 
   PNG actual = canvas->drawMosaic(10);
-  PNG expected;  expected.readFromFile("tests/gridtest-expected.png");
+  PNG expected;  expected.readFromFile("Images/gridtest-expected.png");
 
   // Save and check for correctness
-  actual.writeToFile("gridtest-actual.png");
+  actual.writeToFile("testResults/gridtest-actual.png");
   INFO("Saved `actual` as gridtest-actual.png.");
 
   REQUIRE( actual == expected );
