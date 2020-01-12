@@ -7,6 +7,7 @@
  * Constructor.
  * @param seed - seed to initialize the RNG
  */
+
 Random::Random(unsigned long seed)
 {
     shiftRegister = (seed == 0) ? 1 : seed;

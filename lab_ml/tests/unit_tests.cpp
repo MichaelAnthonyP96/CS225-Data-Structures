@@ -1,8 +1,8 @@
 #include "../cs225/catch/catch.hpp"
 
-#include "../graph.h"
-#include "../edge.h"
-#include "../NimLearner.h"
+#include "graph.h"
+#include "edge.h"
+#include "NimLearner.h"
 
 #include <iostream>
 

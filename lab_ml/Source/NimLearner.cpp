@@ -27,25 +27,23 @@
 NimLearner::NimLearner(unsigned startingTokens) : g_(true, true) {
   /* Your code goes here! */
   // if you have ten tokens, you have 11 states including zero.
-  Vertex *v1 = new Vertex[startingTokens + 1];
-  Vertex *v2 = new Vertex[startingTokens + 1];
   // insert the tokens into the graph
-  for(unsigned i = 0; i < startingTokens; ++i){
-    g_.insertVertex(v1[i]);
-    g_.insertVertex(v2[i]);
+  for(long int i = 0; i <= startingTokens; ++i){
+    // std::cout << "p1-" + std::to_string(i) << std::endl;
+    // std::cout << "p2-" + std::to_string(i) << std::endl;
+    g_.insertVertex("p1-" + to_string(i));
+    g_.insertVertex("p2-" + to_string(i));
     // set the appropriate vertex name
-    g_.setVertexLabel(v1[i],"p1-" + std::to_string(i) );
-    g_.setVertexLabel(v2[i],"p2-" + std::to_string(i) );
-
-    std::cout << "p1-" + std::to_string(i) << std::endl;
-    std::cout << "p2-" + std::to_string(i) << std::endl;
+    g_.setVertexLabel("p1-" + std::to_string(i), "p1-" + std::to_string(i) );
+    g_.setVertexLabel("p2-" + std::to_string(i), "p2-" + std::to_string(i) );
 
     // insert the two edges connected to each vertex
-    for(size_t j = i + 2; j > i; --j) {
-      if(j < startingTokens) {
-        g_.insertEdge(v2[j], v1[i]);
-        g_.insertEdge(v1[j], v2[i]);
+    for(long int j = i - 2; j < i; ++j) {
+      if(j >= 0) {
+        g_.insertEdge(g_.getVertexByLabel("p2-" + to_string(i)), g_.getVertexByLabel("p1-" + to_string(j)));
+        g_.insertEdge(g_.getVertexByLabel("p1-" + to_string(i)), g_.getVertexByLabel("p2-" + to_string(j)));
       }
+      // std::cout << "I,J is equal to: " << i << "," << j << std::endl;
     }
   }
 }
