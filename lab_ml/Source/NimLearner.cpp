@@ -42,6 +42,8 @@ NimLearner::NimLearner(unsigned startingTokens) : g_(true, true) {
       if(j >= 0) {
         g_.insertEdge(g_.getVertexByLabel("p2-" + to_string(i)), g_.getVertexByLabel("p1-" + to_string(j)));
         g_.insertEdge(g_.getVertexByLabel("p1-" + to_string(i)), g_.getVertexByLabel("p2-" + to_string(j)));
+        g_.setEdgeWeight(g_.getVertexByLabel("p2-" + to_string(i)), g_.getVertexByLabel("p1-" + to_string(j)), 0);
+        g_.setEdgeWeight(g_.getVertexByLabel("p1-" + to_string(i)), g_.getVertexByLabel("p2-" + to_string(j)), 0);
       }
       // std::cout << "I,J is equal to: " << i << "," << j << std::endl;
     }
@@ -106,6 +108,36 @@ std::vector<Edge> NimLearner::playRandomGame() const {
  */
 void NimLearner::updateEdgeWeights(const std::vector<Edge> & path) {
  /* Your code goes here! */
+ // determine who won the game
+ bool flag; // true if p1 wins
+ std::string finalVertexLabel = g_.getVertexLabel(path.back().dest);
+ if(finalVertexLabel == "p1-0"){
+    flag = false;
+ } else if (finalVertexLabel == "p2-0"){
+    flag = true;
+ } else {
+   std::cout << "The last edge in the game path returns :" << path.front().getLabel() << std::endl;
+   exit(1);
+ }
+ for(Edge e : path){
+   std::string destName = g_.getVertexLabel(e.dest);
+   // if the destination vertex is p1-*, then this move was made by p2
+   if(destName.substr(0,destName.find('-')) == "p1"){
+     if(flag){ // if flag is true, p1 won the game and this edge should be "punished"
+       g_.setEdgeWeight(e.source, e.dest, e.getWeight() - 1);
+     } else { // p2 won the game and this edge should be "rewarded"
+        g_.setEdgeWeight(e.source, e.dest, e.getWeight() + 1);
+     }
+   } else if (destName.substr(0,destName.find('-')) == "p2"){
+     // if the destination vertex is p2-*, then this move was made by p1
+     if(flag){ // if flag is true, p1 won the game and this edge should be "rewarded"
+       g_.setEdgeWeight(e.source, e.dest, e.getWeight() + 1);
+     } else { // if flag is false, p2 won the game and this edge should be "punished"
+       g_.setEdgeWeight(e.source, e.dest, e.getWeight() - 1);
+     }
+   }
+ }
+
 }
 
 /**
