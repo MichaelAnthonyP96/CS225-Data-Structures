@@ -46,6 +46,8 @@ NimLearner::NimLearner(unsigned startingTokens) : g_(true, true) {
       // std::cout << "I,J is equal to: " << i << "," << j << std::endl;
     }
   }
+  // set the starting vertex of the game. Ex: p1-10
+  startingVertex_ = g_.getVertexLabel("p1-" + to_string(startingTokens));
 }
 
 /**
@@ -59,8 +61,30 @@ NimLearner::NimLearner(unsigned startingTokens) : g_(true, true) {
  */
 std::vector<Edge> NimLearner::playRandomGame() const {
   vector<Edge> path;
- /* Your code goes here! */
-
+  /* Your code goes here! */
+  // if flag is true, it is currently player 1's turn in the game
+  bool flag = true;
+  Vertex source = startingVertex_;
+  int randNum = 0;
+  while(true){
+    randNum = (rand() % 2) + 1;
+    std::string currVertex = g_.getVertexLabel(source);
+    int currNum = std::stoi(currVertex.substr(currVertex.find('-') + 1));
+    // check that you don't overshoot the last Vertex
+    if(randNum > currNum){
+      --randNum;
+    }
+    Vertex destination = g_.getVertexByLabel(flag ? "p2-" + to_string(currNum - randNum) :
+        "p1-"  + to_string(currNum - randNum));
+    path.push_back(g_.getEdge(source , destination));
+    // update which player's turn it is
+    flag = !flag;
+    // update the "iterator" vertex
+    source = destination;
+    if(g_.getVertexLabel(source) == "p1-0" || g_.getVertexLabel(source) == "p2-0"){
+      break;
+    }
+  }
   return path;
 }
 
