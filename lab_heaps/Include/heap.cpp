@@ -10,7 +10,7 @@ template <class T, class Compare>
 size_t heap<T, Compare>::root() const
 {
     // @TODO Update to return the index you are choosing to be your root.
-    //using 1 based indexing
+    // using 1 based indexing
     return 1;
 }
 
@@ -18,7 +18,7 @@ template <class T, class Compare>
 size_t heap<T, Compare>::leftChild(size_t currentIdx) const
 {
     // @TODO Update to return the index of the left child.
-    //using 1 based indexing
+    // using 1 based indexing
     return (2*currentIdx);
 }
 
@@ -26,7 +26,7 @@ template <class T, class Compare>
 size_t heap<T, Compare>::rightChild(size_t currentIdx) const
 {
     // @TODO Update to return the index of the right child.
-    //using 1 based indexing
+    // using 1 based indexing
     return (2*currentIdx + 1);
 }
 
@@ -34,7 +34,7 @@ template <class T, class Compare>
 size_t heap<T, Compare>::parent(size_t currentIdx) const
 {
     // @TODO Update to return the index of the parent.
-    //using 1 based indexing
+    // using 1 based indexing
     return floor(currentIdx/2);
 }
 
@@ -51,7 +51,7 @@ size_t heap<T, Compare>::maxPriorityChild(size_t currentIdx) const
 {
     // @TODO Update to return the index of the child with highest priority
     ///   as defined by higherPriority()
-    //get the left and right child indexs
+    // get the left and right child indices
     size_t leftIdx = leftChild(currentIdx);
     size_t rightIdx = rightChild(currentIdx);
     //if the right node index is valid, since we know the children are added

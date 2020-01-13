@@ -1,7 +1,7 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include "../heap.h"
+#include "heap.h"
 #include <iostream>
 #include <fstream>
 #include <ctype.h>
@@ -9,7 +9,7 @@
 #include <utility>
 
 #include "catchlib.h"
-#include "../random.h"
+#include "random.h"
 
 using namespace std;
 
