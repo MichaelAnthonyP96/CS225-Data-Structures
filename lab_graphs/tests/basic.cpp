@@ -2,8 +2,8 @@
 #include "catch.hpp"
 #include "catchlib.h"
 
-#include "../graph.h"
-#include "../graph_tools.h"
+#include "graph.h"
+#include "graph_tools.h"
 #include <iostream>
 #include <string>
 
