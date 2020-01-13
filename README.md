@@ -7,7 +7,7 @@ In order to build and execute tests on any of the sub-projects with CMakeLists.t
   - make 
   - make test
   
-Otherwise use the existing Makefile in the main directory to do an in-source build:
+Otherwise use the existing Makefile in the sub-project main directory to do an in-source build:
   - make 
   - make test 
   - ./test
