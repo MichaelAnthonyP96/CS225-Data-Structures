@@ -84,7 +84,7 @@ bool PronounceDict::homophones(const string& word1, const string& word2) const
     auto findWORD1 = dict.find(WORD1);
     auto findWORD2 = dict.find(WORD2);
     //true if both words are keys in the dictionary and dictionary values match
-    if(findWORD1->second == findWORD2->second && findWORD1 != dict.end() && findWORD2 != dict.end()){
+    if(findWORD1 != dict.end() && findWORD2 != dict.end() && findWORD1->second == findWORD2->second){
         return true;
     }
     else return false;

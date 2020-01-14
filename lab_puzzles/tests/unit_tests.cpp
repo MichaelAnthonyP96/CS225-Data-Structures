@@ -2,11 +2,11 @@
 #include "catch.hpp"
 #include "catchlib.h"
 
-#include "../anagram_dict.h"
-#include "../fib.h"
-#include "../cartalk_puzzle.h"
-#include "../pronounce_dict.h"
-#include "../common_words.h"
+#include "anagram_dict.h"
+#include "fib.h"
+#include "cartalk_puzzle.h"
+#include "pronounce_dict.h"
+#include "common_words.h"
 
 #include <sstream>
 #include <algorithm>
