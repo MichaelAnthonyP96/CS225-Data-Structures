@@ -99,8 +99,8 @@ TEST_CASE("test_homophones", "[weight=10]")
 TEST_CASE("test_cartalk_puzzle", "[weight=10]")
 {
     PronounceDict d(pronunciations);
-    vector< string > canon = {"scent", "cent", "sent"};
-    auto result = cartalk_puzzle(d, "cartalk_words.txt");
+    vector<string> canon = {"scent", "cent", "sent"};
+    auto result = cartalk_puzzle(d, "Texts/cartalk_words.txt");
     REQUIRE(result.size() == 1);
     vector< string > result_vec = { get<0>(result[0]),
                                     get<1>(result[0]),
@@ -112,8 +112,8 @@ TEST_CASE("test_cartalk_puzzle", "[weight=10]")
 TEST_CASE("test_get_common_words_3", "[weight=15]")
 {
     vector<string> in;
-    in.push_back("small1.txt");
-    in.push_back("small2.txt");
+    in.push_back("Texts/small1.txt");
+    in.push_back("Texts/small2.txt");
     CommonWords cw(in);
     vector<string> students = cw.get_common_words(3);
 	vector<string> canon = {"dog", "pig"};
@@ -123,16 +123,16 @@ TEST_CASE("test_get_common_words_3", "[weight=15]")
 TEST_CASE("test_get_common_words_999", "[weight=15]")
 {
     vector<string> in;
-    in.push_back("small1.txt");
-    in.push_back("small2.txt");
+    in.push_back("Texts/small1.txt");
+    in.push_back("Texts/small2.txt");
     CommonWords cw(in);
     vector<string> students = cw.get_common_words(999);
 	vector<string> canon = {};
     REQUIRE(canon == students);
 
 	in.clear();
-    in.push_back("PrideAndPrejudice.txt");
-    in.push_back("Beowulf.txt");
+    in.push_back("Texts/PrideAndPrejudice.txt");
+    in.push_back("Texts/Beowulf.txt");
     cw = CommonWords(in);
     students = cw.get_common_words(999);
 	canon = {"of", "the"};
