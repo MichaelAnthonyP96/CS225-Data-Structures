@@ -3,7 +3,7 @@
  * Definitions of the binary tree functions you'll be writing for this lab.
  * You'll need to modify this file.
  */
-#include "TreeTraversals/InorderTraversal.h"
+#include "InorderTraversal.h"
 #include <iostream>
 /**
  * @return The height of the binary tree. Recall that the height of a binary

@@ -14,7 +14,7 @@
  #include <algorithm>
  #include <ctype.h>
  #include <vector>
- #include "../binarytree.h"
+ #include "binarytree.h"
 
 
  using namespace std;

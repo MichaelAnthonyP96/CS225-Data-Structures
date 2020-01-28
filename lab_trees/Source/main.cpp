@@ -11,8 +11,8 @@
 #include "binarytree.h"
 #include "coloredout.h"
 #include "random.h"
-#include "TreeTraversals/PreorderTraversal.h"
-#include "TreeTraversals/InorderTraversal.h"
+#include "PreorderTraversal.h"
+#include "InorderTraversal.h"
 
 using namespace std;
 using namespace util;

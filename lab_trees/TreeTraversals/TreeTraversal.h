@@ -2,7 +2,7 @@
 #define TREETRAVERSAL_H
 
 #include <iterator>
-#include "../binarytree.h"
+#include "binarytree.h"
 
 /**
  * Pure virtual class for traversal algorithms on trees.

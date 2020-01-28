@@ -3,7 +3,7 @@
 
 #include <iterator>
 #include <stack>
-#include "../binarytree.h"
+#include "binarytree.h"
 #include "TreeTraversal.h"
 
 using namespace std;
