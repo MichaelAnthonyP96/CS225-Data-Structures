@@ -197,7 +197,12 @@ template <typename T>
 int BinaryTree<T>::sumDistances() const
 {
     // your code here
-    return -1;
+    int rootHeight = height(root), totalHeight = 0;
+    InorderTraversal<int> t(root);
+    for(TreeTraversal<int>::Iterator it = t.begin(); it != t.end(); ++it) {
+      totalHeight += (rootHeight - height(*it));
+    }
+    return totalHeight;
 }
 
 //helper function to determine the element of the farthest right Node from the subroot, recursively
