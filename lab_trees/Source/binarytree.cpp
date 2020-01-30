@@ -77,8 +77,8 @@ void BinaryTree<T>::printLeftToRight(const Node* subRoot) const
 template <typename T>
 void BinaryTree<T>::mirror()
 {
-    //your code here
-    //edge case of an empty tree
+    // your code here
+    // edge case of an empty tree
     if(root == NULL) return;
     else mirror(root);
 }
@@ -105,16 +105,20 @@ template <typename T>
 bool BinaryTree<T>::isOrderedIterative() const
 {
     // your code here
-    //bool goo = false;
-    if(this->getRoot() == NULL) return true;
+    if (this->getRoot() == NULL)
+      return true;
     InorderTraversal<int> iot(this->getRoot());
-    int currentMaximum;
-    int nextMaximum;
+    int currentMaximum = 0, nextMaximum = 0;
     for (TreeTraversal<int>::Iterator it = iot.begin(); it != iot.end(); ) {
   		currentMaximum = (*it)->elem;
-      if(*(++it) == NULL) break;
-      nextMaximum = (*(++it))->elem;
-      if(currentMaximum > nextMaximum) return false;
+        ++it;
+        if (it != iot.end()) {
+          nextMaximum = (*it)->elem;
+        } else {
+          break;
+        }
+        if (currentMaximum > nextMaximum)
+          return false;
   	}
     return true;
 }
