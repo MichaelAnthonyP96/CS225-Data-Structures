@@ -145,6 +145,11 @@ class BinaryTree
     void printPaths(vector<vector<T> > &paths) const;
 
     /**
+     * helper method to determine paths from the root of the tree to all leafs
+     */
+    void findPaths(vector<vector<T> > &paths, vector<T> currPath, Node* curr) const;
+
+    /**
      * Each node in a tree has a distance from the root node - the depth of that
      * node, or the number of edges along the path from that node to the root.
      * This function returns the sum of the distances of all nodes to the root

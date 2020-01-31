@@ -145,28 +145,28 @@ bool BinaryTree<T>::isOrderedRecursive(const Node* subRoot) const
     bool left = false, right = false;
     int leftMax = 0, rightMax = 0;
     if(subRoot == NULL) return true;
-    //if subroot's left is not empty then recursively find out if left is ordered
+    // if subroot's left is not empty then recursively find out if left is ordered
     if(subRoot->left != NULL){
         left = isOrderedRecursive(subRoot->left);
         rightMax = farthestRight(subRoot->left);
     }
-    //subroot's left is empty, so it is technically sorted
+    // subroot's left is empty, so it is technically sorted
     else{
         left = true;
         rightMax = subRoot->elem;
     }
-    //subroot's right is not empty then recursively find out if the right is ordered
+    // subroot's right is not empty then recursively find out if the right is ordered
     if(subRoot->right != NULL){
         right = isOrderedRecursive(subRoot->right);
         leftMax = farthestLeft(subRoot->right);
     }
-    //subroot's right is empty, so it is technically sorted
+    // subroot's right is empty, so it is technically sorted
     else{
         right = true;
         leftMax = subRoot->elem;
     }
-    //if the left and right are ordered
-    //and the leftMax is greater than or equal to rightMax, return true
+    // if the left and right are ordered
+    // and the leftMax is greater than or equal to rightMax, return true
     if(right && left && (leftMax >= rightMax))
         return true;
     return false;
@@ -183,6 +183,24 @@ template <typename T>
 void BinaryTree<T>::printPaths(vector<vector<T> > &paths) const
 {
     // your code here
+    findPaths(paths, vector<T>(), root);
+}
+
+template <typename T>
+void BinaryTree<T>::findPaths(vector<vector<T> > &paths, vector<T> currPath, Node* curr) const {
+  // your code here
+  // push the current node
+  currPath.push_back(curr->elem);
+  if (curr->left == nullptr && curr->right == nullptr) {
+    // if at a leaf push the current path to the list of paths
+    paths.push_back(currPath);
+    return;
+  }
+  // recursively search left and right if the children exists
+  if(curr->left != nullptr)
+    findPaths(paths, currPath, curr->left);
+  if(curr->right != nullptr)
+    findPaths(paths, currPath, curr->right);
 }
 
 /**
