@@ -81,7 +81,7 @@ if(ENABLE_TESTS)
     add_subdirectory(tests)
 endif()
 
-add_executable(main ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
+add_executable(main ${CMAKE_CURRENT_SOURCE_DIR}/source/main.cpp)
 target_link_libraries(main PUBLIC avl imageManipulation coloredOut)
 target_include_directories(main
         PUBLIC
