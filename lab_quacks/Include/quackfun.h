@@ -6,28 +6,24 @@
 #ifndef STACKFUN_H
 #define STACKFUN_H
 
-#include "stack.cpp"
 #include "queue.cpp"
+#include "stack.cpp"
 
 /**
  * Namespace to contain the stack and queue functions for this lab.
  */
-namespace QuackFun
-{
-    using std::ourStack;
-    using std::ourQueue;
+namespace QuackFun {
+using std::ourQueue;
+using std::ourStack;
 
-    template <typename T>
-    T sum(ourStack<T>& s);
+template <typename T> T sum(ourStack<T> &s);
 
-    bool isBalanced(ourQueue<char> input);
+bool isBalanced(ourQueue<char> input);
 
-    template <typename T>
-    void scramble(ourQueue<T>& q);
+template <typename T> void scramble(ourQueue<T> &q);
 
-    template <typename T>
-    bool verifySame(ourStack<T>& s, ourQueue<T>& q);
-};
+template <typename T> bool verifySame(ourStack<T> &s, ourQueue<T> &q);
+}; // namespace QuackFun
 
 #include "quackfun.cpp"
 #endif
