@@ -1,9 +1,9 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-#include "../sketchify.h"
-#include "../cs225/PNG.h"
-#include "../cs225/HSLAPixel.h"
+#include "sketchify.h"
+#include "PNG.h"
+#include "HSLAPixel.h"
 
 using namespace cs225;
 
@@ -21,19 +21,19 @@ bool fileExists(std::string fileName) {
 // Basic tests
 //
 TEST_CASE("Runs without a seg fault", "[weight=2]") {
-	sketchify("tests/in_01.png", "tests/out.png");
+	sketchify("Images/in_01.png", "outputImages/out.png");
 }
 
 TEST_CASE("Produces an output PNG file", "[weight=1]") {
-  const std::string fileName = "tests/out_existanceTest.png";
-
-  // Delete if tests/out_existanceTest exists... if so, delete it.
+  const std::string fileName = "OutputImages/out_existenceTest.png";
+  std::cout << system("pwd") << std::endl;
+  // Delete if OutputImages/out_existanceTest exists... if so, delete it.
   if (fileExists(fileName)) { remove( fileName.c_str() ); }
 
   // Run program
-  sketchify("tests/in_01.png", fileName);
+  sketchify("Images/in_01.png", fileName);
 
-  // Check for file existance
+  // Check for file existence
   REQUIRE( fileExists(fileName) == true );
   remove( fileName.c_str() );
 }
@@ -43,13 +43,13 @@ TEST_CASE("Produces an output PNG file", "[weight=1]") {
 // Similar output tests
 //
 TEST_CASE("Pixels that are part of the sketch are your favorite color", "[weight=2]") {
-  sketchify("tests/in_01.png", "tests/out.png");
+  sketchify("Images/in_01.png", "outputImages/out.png");
 
   PNG png;
-  png.readFromFile("tests/out.png");
+  png.readFromFile("outputImages/out.png");
 
   PNG expected;
-  expected.readFromFile("tests/out_01.png");
+  expected.readFromFile("ExpectedImages/out_01.png");
 
   for (unsigned x = 0; x < expected.width(); x++) {
     for (unsigned y = 0; y < expected.height(); y++) {
@@ -61,13 +61,13 @@ TEST_CASE("Pixels that are part of the sketch are your favorite color", "[weight
 }
 
 TEST_CASE("Pixels that are NOT part of the sketch are white", "[weight=1]") {
-  sketchify("tests/in_01.png", "tests/out.png");
+  sketchify("Images/in_01.png", "OutputImages/out.png");
 
   PNG png;
-  png.readFromFile("tests/out.png");
+  png.readFromFile("OutputImages/out.png");
 
   PNG expected;
-  expected.readFromFile("tests/out_01.png");
+  expected.readFromFile("ExpectedImages/out_01.png");
 
   for (unsigned x = 0; x < expected.width(); x++) {
     for (unsigned y = 0; y < expected.height(); y++) {
@@ -83,11 +83,11 @@ TEST_CASE("Pixels that are NOT part of the sketch are white", "[weight=1]") {
 // Exact output tests
 //
 TEST_CASE("in_01.png produces a correct sketch", "[weight=2]") {
-  sketchify("tests/in_01.png", "tests/out.png");
+  sketchify("Images/in_01.png", "OutputImages/out.png");
 
   PNG expected, png;
-  expected.readFromFile("tests/out_01.png");
-  png.readFromFile("tests/out.png");
+  expected.readFromFile("ExpectedImages/out_01.png");
+  png.readFromFile("OutputImages/out.png");
 
   for (unsigned x = 0; x < expected.width(); x++) {
     for (unsigned y = 0; y < expected.height(); y++) {
@@ -101,11 +101,11 @@ TEST_CASE("in_01.png produces a correct sketch", "[weight=2]") {
 }
 
 TEST_CASE("in_02.png produces a correct sketch", "[weight=1]") {
-  sketchify("tests/in_02.png", "tests/out.png");
+  sketchify("Images/in_02.png", "OutputImages/out.png");
 
   PNG expected, png;
-  expected.readFromFile("tests/out_02.png");
-  png.readFromFile("tests/out.png");
+  expected.readFromFile("ExpectedImages/out_02.png");
+  png.readFromFile("OutputImages/out.png");
 
   for (unsigned x = 0; x < expected.width(); x++) {
     for (unsigned y = 0; y < expected.height(); y++) {
@@ -119,11 +119,11 @@ TEST_CASE("in_02.png produces a correct sketch", "[weight=1]") {
 }
 
 TEST_CASE("in_03.png produces a correct sketch", "[weight=1]") {
-  sketchify("tests/in_03.png", "tests/out.png");
+  sketchify("Images/in_03.png", "OutputImages/out.png");
 
   PNG expected, png;
-  expected.readFromFile("tests/out_03.png");
-  png.readFromFile("tests/out.png");
+  expected.readFromFile("ExpectedImages/out_03.png");
+  png.readFromFile("OutputImages/out.png");
 
   for (unsigned x = 0; x < expected.width(); x++) {
     for (unsigned y = 0; y < expected.height(); y++) {

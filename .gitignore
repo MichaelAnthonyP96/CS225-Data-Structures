@@ -1,0 +1,8 @@
+*.o
+*.d
+*.bin
+*build*/
+**/.idea/**
+**/.objs/**
+*.DS_Store
+
