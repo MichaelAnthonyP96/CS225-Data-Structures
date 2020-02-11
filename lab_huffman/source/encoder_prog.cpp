@@ -9,8 +9,7 @@
 
 using namespace std;
 
-int main(int argc, char** argv)
-{
-    vector<string> args(argv, argv + argc);
-    return encoder::main(args);
+int main(int argc, char **argv) {
+  vector<string> args(argv, argv + argc);
+  return encoder::main(args);
 }

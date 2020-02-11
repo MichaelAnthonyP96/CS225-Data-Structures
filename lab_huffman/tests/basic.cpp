@@ -4,10 +4,10 @@
 #include <fstream>
 #include <unordered_map>
 
-#include "../binary_file_reader.h"
-#include "../decoder.h"
-#include "../encoder.h"
-#include "../huffman_tree.h"
+#include "binary_file_reader.h"
+#include "decoder.h"
+#include "encoder.h"
+#include "huffman_tree.h"
 
 using namespace std;
 
@@ -18,7 +18,7 @@ using namespace std;
 	} while( 0 )
 
 void buildText() {
-	ofstream text( "tests/text.txt" );
+	ofstream text( "text.txt" );
 	ADD_CHAR( 'a', 20 );
 	ADD_CHAR( 'b', 30 );
 	ADD_CHAR( 'c', 60 );
@@ -27,7 +27,7 @@ void buildText() {
 }
 
 void buildText2() {
-	ofstream text( "tests/text.txt" );
+	ofstream text( "text.txt" );
     ADD_CHAR( 'a', 5 );
     ADD_CHAR( 'b', 6 );
     ADD_CHAR( 'c', 12 );
@@ -38,7 +38,7 @@ void buildText2() {
 }
 
 void buildText( int start ) {
-    ofstream text( "tests/text.txt" );
+    ofstream text( "text.txt" );
     for( char c = 'a'; c < 'f'; ++c ) {
         ADD_CHAR( c, start );
         start *= 2;
@@ -74,34 +74,35 @@ HuffmanTree constructTree( string inputFile ) {
 
 TEST_CASE("test_encoder_binary", "[weight=1]") {
 	buildText();
-	encoder::encodeFile( "tests/text.txt", "tests/test.bin", "tests/tree.huff" );
-	compareBinaryFiles( "tests/test.bin", "tests/soln_test.bin" );
+	std::cout << system("pwd") << std::endl;
+	encoder::encodeFile( "text.txt", "Results/test.bin", "Results/tree.huff" );
+	compareBinaryFiles( "Results/test.bin", "Solutions/soln_test.bin" );
 }
 
 TEST_CASE("test_encoder_binary2", "[weight=1]") {
 	buildText2();
-	encoder::encodeFile( "tests/text.txt", "tests/test.bin", "tests/tree.huff" );
-	compareBinaryFiles( "tests/test.bin", "tests/soln_test2.bin" );
+	encoder::encodeFile( "text.txt", "Results/test.bin", "Results/tree.huff" );
+	compareBinaryFiles( "Results/test.bin", "Solutions/soln_test2.bin" );
 }
 
 TEST_CASE("test_encoder_writetree", "[weight=1]") {
 	buildText();
-	encoder::encodeFile( "tests/text.txt", "tests/test.bin", "tests/tree.huff" );
-	compareBinaryFiles( "tests/tree.huff", "tests/soln_tree.huff" );
+	encoder::encodeFile( "text.txt", "Results/test.bin", "Results/tree.huff" );
+	compareBinaryFiles( "Results/tree.huff", "Solutions/soln_tree.huff" );
 }
 
 TEST_CASE("test_encoder_writetree2", "[weight=1]") {
 	buildText2();
-	encoder::encodeFile( "tests/text.txt", "tests/test.bin", "tests/tree.huff" );
-	compareBinaryFiles( "tests/tree.huff", "tests/soln_tree2.huff" );
+	encoder::encodeFile( "text.txt", "Results/test.bin", "Results/tree.huff" );
+	compareBinaryFiles( "Results/tree.huff", "Solutions/soln_tree2.huff" );
 }
 
 TEST_CASE("test_decode", "[weight=1]") {
 	buildText();
-	HuffmanTree htree = constructTree( "tests/text.txt" );
-	BinaryFileReader bfile( "tests/soln_test.bin" );
+	HuffmanTree htree = constructTree( "text.txt" );
+	BinaryFileReader bfile( "Solutions/soln_test.bin" );
 	string decoded = htree.decodeFile( bfile );
-	ifstream in( "tests/text.txt" );
+	ifstream in( "text.txt" );
 	stringstream expected;
 	expected << in.rdbuf();
 	REQUIRE( expected.str() == decoded );
@@ -109,10 +110,10 @@ TEST_CASE("test_decode", "[weight=1]") {
 
 TEST_CASE("test_decode2", "[weight=1]") {
 	buildText2();
-	HuffmanTree htree = constructTree( "tests/text.txt" );
-	BinaryFileReader bfile( "tests/soln_test2.bin" );
+	HuffmanTree htree = constructTree( "text.txt" );
+	BinaryFileReader bfile( "Solutions/soln_test2.bin" );
 	string decoded = htree.decodeFile( bfile );
-	ifstream in( "tests/text.txt" );
+	ifstream in( "text.txt" );
 	stringstream expected;
 	expected << in.rdbuf();
 	REQUIRE( expected.str() == decoded );
@@ -120,39 +121,39 @@ TEST_CASE("test_decode2", "[weight=1]") {
 
 TEST_CASE("test_decode_readtree", "[weight=1]") {
 	buildText();
-	decoder::decodeFile( "tests/soln_test.bin", "tests/soln_tree.huff", "tests/out.txt" );
+	decoder::decodeFile( "Solutions/soln_test.bin", "Solutions/soln_tree.huff", "Results/out.txt" );
 	stringstream expected;
 	stringstream decoded;
-	ifstream expect( "tests/text.txt" );
+	ifstream expect( "text.txt" );
 	expected << expect.rdbuf();
-	ifstream out( "tests/out.txt" );
+	ifstream out( "Results/out.txt" );
 	decoded << out.rdbuf();
 	REQUIRE( expected.str() == decoded.str() );
 }
 
 TEST_CASE("test_decode_readtree2", "[weight=1]") {
 	buildText2();
-	decoder::decodeFile( "tests/soln_test2.bin", "tests/soln_tree2.huff", "tests/out.txt" );
+	decoder::decodeFile( "Solutions/soln_test2.bin", "Solutions/soln_tree2.huff", "Results/out.txt" );
 	stringstream expected;
 	stringstream decoded;
-	ifstream expect( "tests/text.txt" );
+	ifstream expect( "text.txt" );
 	expected << expect.rdbuf();
-	ifstream out( "tests/out.txt" );
+	ifstream out( "Results/out.txt" );
 	decoded << out.rdbuf();
 	REQUIRE( expected.str() == decoded.str() );
 }
 
 TEST_CASE("test_the_works", "[weight=1]") {
     buildText( 2 );
-    encoder::encodeFile( "tests/text.txt", "tests/test.bin", "tests/tree.huff" );
-    decoder::decodeFile( "tests/test.bin", "tests/tree.huff", "tests/out.txt" );
+    encoder::encodeFile( "text.txt", "Results/test.bin", "Results/tree.huff" );
+    decoder::decodeFile( "Results/test.bin", "Results/tree.huff", "Results/out.txt" );
     stringstream expected;
     stringstream decoded;
-    ifstream expect( "tests/test.txt" );
+    ifstream expect( "test.txt" );
     expected << expect.rdbuf();
-    ofstream out( "tests/out.txt" );
+    ofstream out( "Results/out.txt" );
     decoded << out.rdbuf();
     REQUIRE( expected.str() == decoded.str() );
-    compareBinaryFiles( "tests/tree.huff", "tests/soln_tree_2.huff" );
-    compareBinaryFiles( "tests/test.bin", "tests/soln_test_2.bin" );
+    compareBinaryFiles( "Results/tree.huff", "Solutions/soln_tree_2.huff" );
+    compareBinaryFiles( "Results/test.bin", "Solutions/soln_test_2.bin" );
 }
