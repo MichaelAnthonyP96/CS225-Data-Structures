@@ -10,18 +10,18 @@
 
 #include <unistd.h>
 
-#include "../cs225/PNG.h"
-#include "../cs225/HSLAPixel.h"
+#include "cs225/PNG.h"
+#include "cs225/HSLAPixel.h"
 
-#include "../drawable.h"
-#include "../color.h"
-#include "../vector2.h"
-#include "../shape.h"
-#include "../circle.h"
-#include "../triangle.h"
-#include "../rectangle.h"
-#include "../truck.h"
-#include "../flower.h"
+#include "drawable.h"
+#include "color.h"
+#include "vector2.h"
+#include "shape.h"
+#include "circle.h"
+#include "triangle.h"
+#include "rectangle.h"
+#include "truck.h"
+#include "flower.h"
 
 // include at bottom to avoid copying includes
 #include "catchlib.h"

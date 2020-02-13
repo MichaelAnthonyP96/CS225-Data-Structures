@@ -9,25 +9,23 @@
 #ifndef DRAWABLE_H_
 #define DRAWABLE_H_
 
-#include "cs225/PNG.h"
+#include "PNG.h"
 using namespace cs225;
 
 /**
  * @brief A pure virtual interface class that can draw itself to a canvas.
  */
-class Drawable
-{
-  public:
-    virtual ~Drawable()
-    { /* Nothing */
-    }
+class Drawable {
+public:
+  virtual ~Drawable() { /* Nothing */
+  }
 
-    /**
-     * @brief This method will draw the object onto the canvas.
-     *
-     * @param canvas to draw onto.
-     */
-    virtual void draw(PNG* canvas) const = 0;
+  /**
+   * @brief This method will draw the object onto the canvas.
+   *
+   * @param canvas to draw onto.
+   */
+  virtual void draw(PNG *canvas) const = 0;
 };
 
 #endif // DRAWABLE_H_

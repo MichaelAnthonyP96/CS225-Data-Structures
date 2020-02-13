@@ -10,21 +10,20 @@
 #define FLOWER_H_
 #include "circle.h"
 #include "rectangle.h"
-#include "triangle.h"
 #include "shape.h"
+#include "triangle.h"
 
-class Flower : public Drawable
-{
-  private:
-    Shape *stem;
-    Shape *pistil; // center piece of flower
-    Shape *leaf;
+class Flower : public Drawable {
+private:
+  Shape *stem;
+  Shape *pistil; // center piece of flower
+  Shape *leaf;
 
-    void drawPetals(PNG* canvas, const Vector2& center, int x, int y) const;
+  void drawPetals(PNG *canvas, const Vector2 &center, int x, int y) const;
 
-  public:
-    Flower(const Vector2& center);
-    void draw(PNG* canvas) const;
+public:
+  Flower(const Vector2 &center);
+  void draw(PNG *canvas) const;
 };
 
 #endif // FLOWER_H_
