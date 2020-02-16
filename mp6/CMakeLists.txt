@@ -1,38 +1,4 @@
 cmake_minimum_required(VERSION 3.15)
-project(mp6)
-
-set(CMAKE_CXX_STANDARD 14)
-
-include_directories(.)
-include_directories(cs225)
-include_directories(cs225/catch)
-include_directories(cs225/lodepng)
-
-add_executable(mp6
-        cs225/catch/catch.hpp
-        cs225/catch/catchmain.cpp
-        cs225/lodepng/lodepng.cpp
-        cs225/lodepng/lodepng.h
-        cs225/HSLAPixel.cpp
-        cs225/HSLAPixel.h
-        cs225/PNG.cpp
-        cs225/PNG.h
-        cs225/RGB_HSL.h
-        gdb-examples/list.cpp
-        gdb-examples/loop.cpp
-        gdb-examples/playground.cpp
-        gdb-examples/recurse.cpp
-        gdb-examples/swap.cpp
-        gdb-examples/switch.cpp
-        tests/unit_tests.cpp
-        main.cpp
-        skipList.cpp
-        skipList.h
-        skipList_given.cpp
-        skipNode.cpp
-        skipNode.h)
-
-cmake_minimum_required(VERSION 3.15)
 
 # set project metadata ########################################################
 set(MP6_MAJOR_VERSION 1)
@@ -82,7 +48,7 @@ mark_as_advanced(LIBRARY_OUTPUT_PATH EXECUTABLE_OUTPUT_PATH)
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 
 include(GNUInstallDirs)
 
@@ -95,31 +61,18 @@ target_include_directories(imageManipulation
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/cs225/lodepng/>
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/cs225/>)
 
-add_library(shapes
-        ${CMAKE_SOURCE_DIR}/source/circle.cpp
-        ${CMAKE_SOURCE_DIR}/source/rectangle.cpp
-        ${CMAKE_SOURCE_DIR}/source/shape.cpp
-        ${CMAKE_SOURCE_DIR}/source/triangle.cpp
-        ${CMAKE_SOURCE_DIR}/source/line.cpp
-        ${CMAKE_SOURCE_DIR}/source/vector2.cpp)
-target_include_directories(shapes
+add_library(skipLists
+        ${CMAKE_SOURCE_DIR}/source/skipNode.cpp
+        #${CMAKE_SOURCE_DIR}/source/skipList.cpp
+        ${CMAKE_SOURCE_DIR}/source/skipList_given.cpp)
+target_include_directories(skipLists
         PUBLIC
         $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/>)
-target_link_libraries(shapes PUBLIC imageManipulation)
-
-add_library(drawable
-        ${CMAKE_SOURCE_DIR}/source/flower.cpp
-        ${CMAKE_SOURCE_DIR}/source/truck.cpp)
-target_include_directories(drawable
-        PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/>)
-target_link_libraries(drawable PUBLIC shapes imageManipulation)
+target_link_libraries(skipLists PUBLIC imageManipulation)
 
 add_executable(main
         ${CMAKE_SOURCE_DIR}/source/main.cpp)
-target_link_libraries(main PUBLIC drawable shapes imageManipulation)
-
-
+target_link_libraries(main PUBLIC skipLists imageManipulation)
 
 if(ENABLE_TESTS)
     enable_testing()
@@ -139,7 +92,7 @@ if(BUILD_DOCUMENTATION)
     if(NOT DOXYGEN_FOUND)
         message(FATAL_ERROR "Doxygen is needed to build the documentation.")
     endif()
-    set(doxyfile_in ${CMAKE_CURRENT_SOURCE_DIR}/doc/MP6.cfg.in)
+    set(doxyfile_in ${CMAKE_CURRENT_SOURCE_DIR}/../doxygen/doxygen.conf)
     set(doxyfile ${CMAKE_CURRENT_BINARY_DIR}/MP6.cfg)
     set(documentation ${CMAKE_CURRENT_BINARY_DIR}/docs)
     configure_file(${doxyfile_in} ${doxyfile} @ONLY)

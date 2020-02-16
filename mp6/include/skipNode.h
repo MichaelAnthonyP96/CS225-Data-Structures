@@ -12,7 +12,7 @@
 #ifndef SKIPNODE_H_
 #define SKIPNODE_H_
 
-#include "cs225/HSLAPixel.h"
+#include "HSLAPixel.h"
 #include <map>
 #include <stdio.h>
 #include <vector>

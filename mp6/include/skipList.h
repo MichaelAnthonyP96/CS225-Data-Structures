@@ -13,8 +13,8 @@
 #ifndef SKIPLIST_H_
 #define SKIPLIST_H_
 
-#include "cs225/HSLAPixel.h"
-#include "cs225/PNG.h"
+#include "HSLAPixel.h"
+#include "PNG.h"
 #include "skipNode.h"
 #include <algorithm>
 #include <climits>
@@ -88,12 +88,6 @@ public:
    */
   const SkipList &operator=(const SkipList &other);
 
-  /**
-   * Inserts a new node into the sorted order in the list, initialized with the
-   * provided values.
-   * @param key The key to associate with the new Node
-   * @param value The value to associate with the new Node
-   */
   void insert(int key, HSLAPixel value);
 
   /**
@@ -127,12 +121,6 @@ public:
    */
   void printKeys();
 
-  /**
-   * A function that searches for the given key and returns the associated
-   * HSLAPixel Returns (0, 0, 0, 50) if it's not found
-   * @param key The key to search for
-   * @return The pixel with the specified key, or (0, 0, 0, 50) if not found
-   */
   HSLAPixel search(int key);
 
   /**

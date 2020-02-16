@@ -9,8 +9,8 @@
 
 // Feel free to modify this file to test more aspects of your list
 
-#include "cs225/HSLAPixel.h"
-#include "cs225/PNG.h"
+#include "HSLAPixel.h"
+#include "PNG.h"
 #include "skipList.h"
 #include <iostream>
 #include <string>

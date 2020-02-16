@@ -1,4 +1,6 @@
 @INCLUDE        = ../doxygen/doxygen.conf
 PROJECT_NAME    = "MP6"
+## PROJECT_NUMBER  = 1.0
+OUTPUT_LANGUAGE = English
 PROJECT_BRIEF   = "Debugging Skills"
 EXTRACT_PRIVATE = YES
