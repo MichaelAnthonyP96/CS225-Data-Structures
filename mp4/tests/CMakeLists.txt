@@ -6,9 +6,8 @@ set ( TEST_ENV_PATH_OPTIONS "PATH=${CMAKE_CURRENT_BINARY_DIR}/../bin:$ENV{PATH}"
 #${CMAKE_CURRENT_BINARY_DIR}/../lib")
 
 # add subdir for the result images
-#file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/tests/Results)
-#file(COPY ${PROJECT_SOURCE_DIR}/tests/text.txt DESTINATION ${PROJECT_BINARY_DIR}/tests/)
-#file(COPY ${PROJECT_SOURCE_DIR}/tests/Solutions DESTINATION ${PROJECT_BINARY_DIR}/tests/)
+file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/tests/Results)
+file(COPY ${PROJECT_SOURCE_DIR}/tests/inputImages DESTINATION ${PROJECT_BINARY_DIR}/tests/)
 
 #[[add_executable(mp4
         cs225/catch/catch.hpp

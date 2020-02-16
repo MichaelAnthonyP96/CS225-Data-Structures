@@ -24,11 +24,11 @@ using namespace cs225;
 
 TEST_CASE("Illini I - FloodFilledImage, DFS", "[weight=3][part=2]") {
   PNG png;
-  png.readFromFile("tests/i.png");
+  png.readFromFile("inputImages/i.png");
   PNG expected;
-  expected.readFromFile("tests/i-rainbow-dfs.png");
+  expected.readFromFile("inputImages/i-rainbow-dfs.png");
   PNG expected2;
-  expected2.readFromFile("tests/i-rainbow-dfs-2.png");
+  expected2.readFromFile("inputImages/i-rainbow-dfs-2.png");
 
   FloodFilledImage image(png);
   DFS dfs(png, Point(40, 40), 0.05);
@@ -41,10 +41,10 @@ TEST_CASE("Illini I - FloodFilledImage, DFS", "[weight=3][part=2]") {
   PNG secondFrame = animation.getFrame(1);
   PNG lastFrame = animation.getFrame(animation.frameCount() - 1);
 
-  secondFrame.writeToFile("i-rainbow-dfs-2.png");
-  lastFrame.writeToFile("i-rainbow-dfs.png");
-  animation.write("i-rainbow-dfs.gif");
-  INFO("Files written to i-rainbow-dfs-* for debugging.");
+  secondFrame.writeToFile("Results/i-rainbow-dfs-2.png");
+  lastFrame.writeToFile("Results/i-rainbow-dfs.png");
+  animation.write("Results/i-rainbow-dfs.gif");
+  INFO("Files written to Results/i-rainbow-dfs-* for debugging.");
 
   REQUIRE(secondFrame == expected2);
   REQUIRE(lastFrame == expected);
@@ -52,11 +52,11 @@ TEST_CASE("Illini I - FloodFilledImage, DFS", "[weight=3][part=2]") {
 
 TEST_CASE("Illini I - FloodFilledImage, BFS", "[weight=3][part=2]") {
   PNG png;
-  png.readFromFile("tests/i.png");
+  png.readFromFile("inputImages/i.png");
   PNG expected;
-  expected.readFromFile("tests/i-rainbow-bfs.png");
+  expected.readFromFile("inputImages/i-rainbow-bfs.png");
   PNG expected2;
-  expected2.readFromFile("tests/i-rainbow-bfs-2.png");
+  expected2.readFromFile("inputImages/i-rainbow-bfs-2.png");
 
   FloodFilledImage image(png);
   BFS bfs(png, Point(40, 40), 0.05);
@@ -69,10 +69,10 @@ TEST_CASE("Illini I - FloodFilledImage, BFS", "[weight=3][part=2]") {
   PNG secondFrame = animation.getFrame(1);
   PNG lastFrame = animation.getFrame(animation.frameCount() - 1);
 
-  secondFrame.writeToFile("i-rainbow-bfs-2.png");
-  lastFrame.writeToFile("i-rainbow-bfs.png");
-  animation.write("i-rainbow-bfs.gif");
-  INFO("Files written to i-rainbow-bfs-* for debugging.");
+  secondFrame.writeToFile("Results/i-rainbow-bfs-2.png");
+  lastFrame.writeToFile("Results/i-rainbow-bfs.png");
+  animation.write("Results/i-rainbow-bfs.gif");
+  INFO("Files written to Results/i-rainbow-bfs-* for debugging.");
 
   REQUIRE(secondFrame == expected2);
   REQUIRE(lastFrame == expected);
@@ -80,11 +80,11 @@ TEST_CASE("Illini I - FloodFilledImage, BFS", "[weight=3][part=2]") {
 
 TEST_CASE("Lantern- FloodFilledImage, BFS", "[weight=3][part=2]") {
   PNG png;
-  png.readFromFile("tests/lantern.png");
+  png.readFromFile("inputImages/lantern.png");
   PNG expected;
-  expected.readFromFile("tests/lantern-rainbow-bfs.png");
+  expected.readFromFile("inputImages/lantern-rainbow-bfs.png");
   PNG expected2;
-  expected2.readFromFile("tests/lantern-rainbow-bfs-2.png");
+  expected2.readFromFile("inputImages/lantern-rainbow-bfs-2.png");
 
   FloodFilledImage image(png);
   BFS bfs(png, Point(40, 40), 0.5);
@@ -97,10 +97,10 @@ TEST_CASE("Lantern- FloodFilledImage, BFS", "[weight=3][part=2]") {
   PNG secondFrame = animation.getFrame(1);
   PNG lastFrame = animation.getFrame(animation.frameCount() - 1);
 
-  secondFrame.writeToFile("lantern-rainbow-bfs-2.png");
-  lastFrame.writeToFile("lantern-rainbow-bfs.png");
-  animation.write("lantern-rainbow-bfs.gif");
-  INFO("Files written to lantern-rainbow-dfs-* for debugging.");
+  secondFrame.writeToFile("Results/lantern-rainbow-bfs-2.png");
+  lastFrame.writeToFile("Results/lantern-rainbow-bfs.png");
+  animation.write("Results/lantern-rainbow-bfs.gif");
+  INFO("Files written to Results/lantern-rainbow-dfs-* for debugging.");
 
   REQUIRE(secondFrame == expected2);
   REQUIRE(lastFrame == expected);
@@ -108,11 +108,11 @@ TEST_CASE("Lantern- FloodFilledImage, BFS", "[weight=3][part=2]") {
 
 TEST_CASE("PacMan - FloodFilledImage, DFS", "[weight=3][part=2]") {
   PNG png;
-  png.readFromFile("tests/pacman.png");
+  png.readFromFile("inputImages/pacman.png");
   PNG expected;
-  expected.readFromFile("tests/pacman-solid-dfs.png");
+  expected.readFromFile("inputImages/pacman-solid-dfs.png");
   PNG expected2;
-  expected2.readFromFile("tests/pacman-solid-dfs-2.png");
+  expected2.readFromFile("inputImages/pacman-solid-dfs-2.png");
 
   FloodFilledImage image(png);
   DFS dfs(png, Point(100, 50), 0.2);
@@ -126,10 +126,10 @@ TEST_CASE("PacMan - FloodFilledImage, DFS", "[weight=3][part=2]") {
   PNG secondFrame = animation.getFrame(1);
   PNG lastFrame = animation.getFrame(animation.frameCount() - 1);
 
-  secondFrame.writeToFile("pacman-solid-dfs-2.png");
-  lastFrame.writeToFile("pacman-solid-dfs.png");
-  animation.write("pacman-solid-dfs.gif");
-  INFO("Files written to pacman-solid-dfs-* for debugging.");
+  secondFrame.writeToFile("Results/pacman-solid-dfs-2.png");
+  lastFrame.writeToFile("Results/pacman-solid-dfs.png");
+  animation.write("Results/pacman-solid-dfs.gif");
+  INFO("Files written to Results/pacman-solid-dfs-* for debugging.");
 
   REQUIRE(secondFrame == expected2);
   REQUIRE(lastFrame == expected);
@@ -137,11 +137,11 @@ TEST_CASE("PacMan - FloodFilledImage, DFS", "[weight=3][part=2]") {
 
 TEST_CASE("PacMan - FloodFilledImage, BFS", "[weight=3][part=2]") {
   PNG png;
-  png.readFromFile("tests/pacman.png");
+  png.readFromFile("inputImages/pacman.png");
   PNG expected;
-  expected.readFromFile("tests/pacman-solid-bfs.png");
+  expected.readFromFile("inputImages/pacman-solid-bfs.png");
   PNG expected2;
-  expected2.readFromFile("tests/pacman-solid-bfs-2.png");
+  expected2.readFromFile("inputImages/pacman-solid-bfs-2.png");
 
   FloodFilledImage image(png);
   BFS bfs(png, Point(100, 50), 0.2);
@@ -155,10 +155,10 @@ TEST_CASE("PacMan - FloodFilledImage, BFS", "[weight=3][part=2]") {
   PNG secondFrame = animation.getFrame(1);
   PNG lastFrame = animation.getFrame(animation.frameCount() - 1);
 
-  secondFrame.writeToFile("pacman-solid-bfs-2.png");
-  lastFrame.writeToFile("pacman-solid-bfs.png");
-  animation.write("pacman-solid-bfs.gif");
-  INFO("Files written to pacman-solid-bfs-* for debugging.");
+  secondFrame.writeToFile("Results/pacman-solid-bfs-2.png");
+  lastFrame.writeToFile("Results/pacman-solid-bfs.png");
+  animation.write("Results/pacman-solid-bfs.gif");
+  INFO("Files written to Results/pacman-solid-bfs-* for debugging.");
 
   REQUIRE(secondFrame == expected2);
   REQUIRE(lastFrame == expected);
