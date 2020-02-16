@@ -1,7 +1,7 @@
 #include <cmath>
 
-#include "../cs225/HSLAPixel.h"
-#include "../Point.h"
+#include "Point.h"
+#include "HSLAPixel.h"
 
 #include "ColorPicker.h"
 #include "GradientColorPicker.h"
@@ -9,9 +9,9 @@
 /**
  * GradientColorPicker constructor
  */
-GradientColorPicker::GradientColorPicker(
-  HSLAPixel color1, HSLAPixel color2, Point center, unsigned radius
-) : color1(color1), color2(color2), center(center), radius(radius) { }
+GradientColorPicker::GradientColorPicker(HSLAPixel color1, HSLAPixel color2,
+                                         Point center, unsigned radius)
+    : color1(color1), color2(color2), center(center), radius(radius) {}
 
 /**
  * Picks the color for pixel (x, y).
@@ -36,7 +36,9 @@ HSLAPixel GradientColorPicker::getColor(unsigned x, unsigned y) {
   double d = sqrt((dx * dx) + (dy * dy));
   double pct = d / radius;
 
-  if (pct >= 1) { return color2; }
+  if (pct >= 1) {
+    return color2;
+  }
 
   double h = color1.h - (color1.h * pct) + (color2.h * pct);
   double s = color1.s - (color1.s * pct) + (color2.s * pct);

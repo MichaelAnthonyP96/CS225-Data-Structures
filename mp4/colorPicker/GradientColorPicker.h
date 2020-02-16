@@ -1,9 +1,9 @@
 #ifndef GradientColorPicker_H
 #define GradientColorPicker_H
 
+#include "Point.h"
+#include "HSLAPixel.h"
 #include "ColorPicker.h"
-#include "../cs225/HSLAPixel.h"
-#include "../Point.h"
 
 using namespace cs225;
 
@@ -12,7 +12,8 @@ using namespace cs225;
  */
 class GradientColorPicker : public ColorPicker {
 public:
-  GradientColorPicker(HSLAPixel color1, HSLAPixel color2, Point center, unsigned radius);
+  GradientColorPicker(HSLAPixel color1, HSLAPixel color2, Point center,
+                      unsigned radius);
   HSLAPixel getColor(unsigned x, unsigned y);
 
 private:

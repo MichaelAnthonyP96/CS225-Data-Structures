@@ -7,7 +7,7 @@
  * RainbowColorPicker constructor
  */
 RainbowColorPicker::RainbowColorPicker(double increment)
-  : hue(0), increment(increment) { }
+    : hue(0), increment(increment) {}
 
 /**
  * Picks the color for pixel (x, y).
@@ -20,6 +20,8 @@ RainbowColorPicker::RainbowColorPicker(double increment)
 HSLAPixel RainbowColorPicker::getColor(unsigned x, unsigned y) {
   HSLAPixel pixel(hue, 1, 0.5);
   hue += increment;
-  if (hue >= 360) { hue -= 360; }
+  if (hue >= 360) {
+    hue -= 360;
+  }
   return pixel;
 }

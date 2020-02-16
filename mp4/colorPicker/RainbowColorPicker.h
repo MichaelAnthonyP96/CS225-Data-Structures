@@ -1,8 +1,8 @@
 #ifndef RAINBOWCOLORPICKER_H
 #define RAINBOWCOLORPICKER_H
 
-#include "ColorPicker.h"
 #include "../cs225/HSLAPixel.h"
+#include "ColorPicker.h"
 
 using namespace cs225;
 

@@ -1,9 +1,9 @@
 #ifndef SolidColorPicker_H
 #define SolidColorPicker_H
 
+#include "Point.h"
+#include "HSLAPixel.h"
 #include "ColorPicker.h"
-#include "../cs225/HSLAPixel.h"
-#include "../Point.h"
 
 using namespace cs225;
 

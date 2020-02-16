@@ -4,11 +4,11 @@
 #ifndef IMAGETRAVERSAL_H
 #define IMAGETRAVERSAL_H
 
+#include "Point.h"
+#include "HSLAPixel.h"
+#include "PNG.h"
 #include <iterator>
 #include <stack>
-#include "../cs225/HSLAPixel.h"
-#include "../cs225/PNG.h"
-#include "../Point.h"
 
 using namespace cs225;
 
@@ -34,11 +34,12 @@ public:
   //  double tolerance;
   class Iterator : std::iterator<std::forward_iterator_tag, Point> {
   public:
-    Iterator();//default constructor
-    Iterator(ImageTraversal& traversal, Point p);//2-param constructor used for end()
-    ~Iterator();//destructor
+    Iterator(); // default constructor
+    Iterator(ImageTraversal &traversal,
+             Point p); // 2-param constructor used for end()
+    ~Iterator();       // destructor
 
-    Iterator & operator++();
+    Iterator &operator++();
     Point operator*();
     bool operator!=(const Iterator &other);
     Iterator operator=(const Iterator &other);
@@ -50,13 +51,13 @@ public:
   private:
     /** @todo [Part 1] */
     /** add private members here if neccesary*/
-    ImageTraversal* traversal;//either DFS or BFS
-    Point current;//holds the point throughout the iteration
+    ImageTraversal *traversal; // either DFS or BFS
+    Point current;             // holds the point throughout the iteration
   };
 
   ~ImageTraversal();
 
-  static double calculateDelta(const HSLAPixel & p1, const HSLAPixel & p2);
+  static double calculateDelta(const HSLAPixel &p1, const HSLAPixel &p2);
 
   /**
    * The begining of an iterator
@@ -74,7 +75,7 @@ public:
    * Add new point to the traversal
    * Virtual function. Derived class need to implement this
    */
-  virtual void add(const Point & t) = 0;
+  virtual void add(const Point &t) = 0;
   /**
    * Remove and return the next point of the traversal
    * Virtual function. Derived class need to implement this
@@ -93,8 +94,5 @@ public:
 
   virtual bool eligible(unsigned x, unsigned y) const = 0;
 };
-
-
-
 
 #endif

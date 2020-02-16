@@ -14,7 +14,7 @@ public:
   /**
    * Class destructor
    */
-  virtual ~ColorPicker() { }
+  virtual ~ColorPicker() {}
   /**
    * Select a color for the given point (x, y)
    * All derived classes needs to implement this
