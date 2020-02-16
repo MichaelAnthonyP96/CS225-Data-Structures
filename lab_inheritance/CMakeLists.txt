@@ -92,12 +92,12 @@ if(ENABLE_TESTS)
     add_subdirectory(tests)
 endif()
 
-# Export HUFFMAN as a CMake package
-#install(FILES Lab_HUFFMANConfig.cmake
-#        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/HUFFMAN)
-#install(EXPORT HUFFMAN
-#        NAMESPACE HUFFMAN::
-#        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/HUFFMAN)
+# Export INHERITANCE as a CMake package
+#install(FILES Lab_INHERITANCEConfig.cmake
+#        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/INHERITANCE)
+#install(EXPORT INHERITANCE
+#        NAMESPACE INHERITANCE::
+#        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/INHERITANCE)
 
 # Documentation
 if(BUILD_DOCUMENTATION)
@@ -105,8 +105,8 @@ if(BUILD_DOCUMENTATION)
     if(NOT DOXYGEN_FOUND)
         message(FATAL_ERROR "Doxygen is needed to build the documentation.")
     endif()
-    set(doxyfile_in ${CMAKE_CURRENT_SOURCE_DIR}/doc/HUFFMAN.cfg.in)
-    set(doxyfile ${CMAKE_CURRENT_BINARY_DIR}/HUFFMAN.cfg)
+    set(doxyfile_in ${CMAKE_CURRENT_SOURCE_DIR}/doc/INHERITANCE.cfg.in)
+    set(doxyfile ${CMAKE_CURRENT_BINARY_DIR}/INHERITANCE.cfg)
     set(documentation ${CMAKE_CURRENT_BINARY_DIR}/docs)
     configure_file(${doxyfile_in} ${doxyfile} @ONLY)
     add_custom_command(OUTPUT ${documentation}
@@ -115,5 +115,5 @@ if(BUILD_DOCUMENTATION)
             DEPENDS ${doxyfile} ${doxy_extra_files}
             COMMENT "Generating documentation")
     add_custom_target(docs ALL DEPENDS ${documentation})
-    install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/docs DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/Lab_HUFFMAN)
+    install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/docs DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/Lab_INHERITANCE)
 endif()
