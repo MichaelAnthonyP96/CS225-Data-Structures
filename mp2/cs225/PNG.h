@@ -94,12 +94,23 @@ namespace cs225 {
       * @return Width of the image.
       */
     unsigned int width() const;
+    /**
+     *
+     * @param w new width, only used when trimming
+     */
+    void setWidth(unsigned int w);
 
     /**
       * Gets the height of this image.
       * @return Height of the image.
       */
     unsigned int height() const;
+
+    /**
+    *
+    * @param h new height, only used when trimming
+    */
+    void setHeight(unsigned int h);
 
     /**
       * Resizes the image to the given coordinates. Attempts to preserve

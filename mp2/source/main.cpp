@@ -8,16 +8,27 @@ int main() {
   //   Before exiting main, save your creation to disk as myImage.png
   //
 
-    Image alma; alma.readFromFile("tests/alma.png");
-    Image i;    i.readFromFile("tests/i.png");
+  Image alma;
+  alma.readFromFile("tests/SourceImages/alma.png");
+  StickerSheet sheet(alma, 5);
 
-    StickerSheet sheet(alma, 5);
-    sheet.addSticker(i, 20, 200);
+  Image gorilla;
+  gorilla.readFromFile("tests/SourceImages/GorillaSelfie.png");
+  gorilla.clean(0.1);
+  sheet.addSticker(gorilla, 540, 345);
 
-    Image expected;
-    expected.readFromFile("tests/expected.png");
+  Image dragon;
+  dragon.readFromFile("tests/SourceImages/dragon.png");
+  dragon.clean(0.01);
+  dragon.scale(0.35);
+  sheet.addSticker(dragon, 645, 20);
 
-    //REQUIRE( sheet.render() == expected );
+  Image cyborg;
+  cyborg.readFromFile("tests/SourceImages/cyborg.png");
+  cyborg.clean(0.05);
+  sheet.addSticker(cyborg, 5, 85);
 
+  Image result = sheet.render();
+  result.writeToFile("testResults/myImage.png");
   return 0;
 }

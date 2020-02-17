@@ -170,9 +170,17 @@ namespace cs225 {
     return width_;
   }
 
+  void PNG::setWidth(unsigned int w) {
+    width_ = w;
+  }
+
   unsigned int PNG::height() const {
     return height_;
   }
+
+void PNG::setHeight(unsigned int h) {
+  height_ = h;
+}
 
   void PNG::resize(unsigned int newWidth, unsigned int newHeight) {
     // Create a new vector to store the image data for the new (resized) image

@@ -112,9 +112,21 @@ public:
     * @return unsigned int the size to the image in the vertical dimension.
     */
     unsigned int getHeight() const;
+  /**
+   * Clean the non-zero alpha values which are not apart of the image
+   * @param threshold All alpha values below this limit are set to zero
+   */
+    void clean(double threshold);
+    /**
+     * Trim the image, removing portions outside of the domain specified
+     * @param startW starting pixel width index of the kept domain
+     * @param endW final pixel index kept in the domain
+     * @param startH starting pixel height index of the kept domain
+     * @param endH final pixel index kept in the domain
+     */
+    void trim(int startW, int endW, int startH, int endH);
 private:
     void _copy(Image const & other);
 };
 
 #endif
- 
